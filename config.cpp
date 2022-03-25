@@ -10,10 +10,11 @@ Config::Config(QString cfgFile)
     else
     {
         pri_cfgFile=cfgFile;
-        qDebug()<<pri_cfgFile;
+        qDebug()<<"Config already exists => "<<pri_cfgFile;
     }
     pri_pSettings=new QSettings(pri_cfgFile,QSettings::IniFormat);
 }
+
 
 Config::~Config(void)
 {
@@ -21,10 +22,12 @@ Config::~Config(void)
     pri_pSettings=0;
 }
 
+
 void Config::Set(QString nodeName,QString keyName,QVariant value)
 {
     pri_pSettings->setValue(QString("/%1/%2").arg(nodeName).arg(keyName),value);
 }
+
 
 QVariant Config::Get(QString nodeName, QString keyName)
 {

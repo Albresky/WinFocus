@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <config.h>
+#include <mainwindow.h>
 
 namespace Ui {
 class configWindow;
@@ -13,7 +14,7 @@ class configWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit configWindow(QWidget *parent = nullptr);
+    configWindow(QWidget *parent = nullptr);
     ~configWindow();
 
 private slots:
@@ -29,7 +30,6 @@ private slots:
 
 private:
     Ui::configWindow *ui;
-//    Config loadConfig;
 };
 
 #endif // CONFIGWINDOW_H

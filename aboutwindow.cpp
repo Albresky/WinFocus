@@ -8,11 +8,14 @@ aboutWindow::aboutWindow(QWidget *parent) :
     ui(new Ui::aboutWindow)
 {
     ui->setupUi(this);
+
+    setWindowFlags(windowFlags()|Qt::Dialog);
+    setWindowModality(Qt::ApplicationModal);
+    setWindowFlags(windowFlags()&~Qt::WindowMinMaxButtonsHint);
+
     setWindowIcon(QIcon(":/icon.ico"));
     setWindowTitle("关于");
     setFixedSize(300,200);
-
-    setWindowFlags(windowFlags()&~Qt::WindowMinMaxButtonsHint);
 
     ui->name->setText(tr("<font style='font-size:18px;font-family:Microsoft YaHei;color:black'><b>WinFocus</b></font><font style='font-size:12px'>&nbsp;(x64)</font>"));
 
@@ -26,11 +29,11 @@ aboutWindow::aboutWindow(QWidget *parent) :
     connect(ui->github,&QLabel::linkActivated,this,&aboutWindow::github_linkActivated);
 }
 
+
 aboutWindow::~aboutWindow()
 {
     delete ui;
 }
-
 
 
 void aboutWindow::blog_linkActivated()

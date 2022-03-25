@@ -64,9 +64,10 @@ bool copyPic(QString resFile,const QString& targetDir,QString num)
     if(!FileCopy(resFile,targetDir+"\\"+num+".jpg"))
     {
         qDebug()<<"pic copy OK!";
-        return false;
+        return true;
     }
-    return true;
+    qDebug()<<"pic copy Fail!";
+    return false;
 }
 
 bool storeIni(const QStringList &fileNameList,QString& targetDir)
@@ -77,7 +78,7 @@ bool storeIni(const QStringList &fileNameList,QString& targetDir)
     {
         file.open(QIODevice::ReadWrite|QIODevice::Text);
     }
-    QStringList existNames;
+    QVector<QString> existNames;
     QTextStream _ini(&file);
     while(!_ini.atEnd())
     {
@@ -95,7 +96,10 @@ bool storeIni(const QStringList &fileNameList,QString& targetDir)
             _ini<<s<<"\r\n";
             qDebug()<<"storeIni()|prefix=>"<<prefix;
             if(!copyPic(prefix+"\\"+s,targetDir,QString::number(i)))
+            {
+                file.close();
                 return false;
+            }
         }
     }
     file.close();
@@ -117,6 +121,7 @@ bool createFile(const QString& fileName)
         qfile.close();
         return true;
     }
+    qfile.close();
     return false;
 }
 

@@ -5,7 +5,7 @@
 #include <QDir>
 #include <QString>
 #include <QDebug>
-#include <iostream>
+#include <QIcon>
 #include <QFileDialog>
 #include <stdlib.h>
 

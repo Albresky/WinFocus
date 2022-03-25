@@ -17,6 +17,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    Ui::MainWindow *ui;
 
 private slots:
     void about_clicked();
@@ -27,16 +28,15 @@ private slots:
 
     void on_apply_btn_released();
 
-//    void on_apply_btn_clicked();
-
-    void on_pushButton_clicked();
+    void on_openFolder_clicked();
 
 private:
-    Ui::MainWindow *ui;
     QMovie* qGif_pressed;
     QMovie* qGif_released;
     QStringList btn_list;
     Config* cfg;
     QString* loct;
+
+    void updateLocatState();
 };
 #endif // MAINWINDOW_H

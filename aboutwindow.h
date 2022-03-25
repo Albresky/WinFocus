@@ -2,6 +2,7 @@
 #define ABOUTWINDOW_H
 
 #include <QWidget>
+#include <commonHeaders.h>
 
 namespace Ui {
 class aboutWindow;

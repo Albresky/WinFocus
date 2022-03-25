@@ -4,7 +4,7 @@
 #include "ui_configwindow.h"
 #include <QDesktopServices>
 
-configWindow::configWindow(QWidget *parent) :
+configWindow::configWindow(QWidget *parent):
     QWidget(parent),
     ui(new Ui::configWindow)
 {
@@ -47,9 +47,6 @@ configWindow::configWindow(QWidget *parent) :
     langShow =(langShow=="zh-CN")?"简体中文":langShow;
     ui->langBox->setCurrentText(langShow);
 
-
-    //    if(ui->langBox->findText(langShow)==-1)
-    //        ui->langBox->addItem("English");
     qDebug()<<"load language => "<<langShow;
 
     //Load FileStoreLocation
