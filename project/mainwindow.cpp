@@ -100,68 +100,6 @@ void MainWindow::config_clicked()
 }
 
 
-//void MainWindow::on_apply_btn_pressed()
-//{
-//    qDebug()<<"apply_Btn pressed";
-//    updateLocatState();
-//    if(*this->loct==QString::fromLocal8Bit("NULL"))
-//    {
-//        qDebug()<<"Location uninitialized.";
-//        ui->statusbar->setStyleSheet("font-size:10px");
-//        ui->statusbar->setStyleSheet("color:red");
-//        ui->statusbar->showMessage(tr("保存路径未初始化"));
-//        return;
-//    }
-//    ui->apply_btn->setEnabled(true);
-//    ui->openFolder->setEnabled(true);
-//    ui->apply_lbl->show();
-//    for(int i=0;i<=8;i++)
-//    {
-//        ui->apply_lbl->setStyleSheet(this->btn_list[i]);
-//        QThread::msleep(125);
-//    }
-
-//    getPicPath();
-//    QVector<QString> filenamelist;
-//    if(getPicName(prefix,filenamelist))
-//    {
-//        qDebug()<<"getPicNameList success!";
-//    }
-
-//    qDebug()<<"++++++++++++++++picNames+++++++++++++++++";
-
-//    for(int i=0;i<filenamelist.size();i++)
-//    {
-//        qDebug()<<filenamelist[i];
-//    }
-
-//    qDebug()<<"++++++++++++++++picNames+++++++++++++++++";
-
-//    ui->statusbar->setStyleSheet("font-size:11px;color:green");
-
-//    if(storeIni(filenamelist,*loct))
-//    {
-//        ui->statusbar->showMessage(tr("锁屏壁纸提取成功！"),200000);
-//        qDebug()<<"store FileName Success!";
-//        return;
-//    }
-
-//    ui->statusbar->showMessage(tr("锁屏壁纸提取失败！"),200000);
-//}
-
-
-//void MainWindow::on_apply_btn_released()
-//{
-//    qDebug()<<"pushBtn released";
-//    ui->apply_lbl->setMovie(this->qGif_released);
-//    ui->apply_lbl->show();
-//    this->qGif_released->start();
-//    ui->apply_lbl->setMovie(this->qGif_pressed);
-//    ui->apply_lbl->show();
-//    this->qGif_pressed->start();
-//}
-
-
 void MainWindow::on_openFolder_clicked()
 {
     qDebug()<<"openFolder_Btn pressed";
