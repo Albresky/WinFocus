@@ -24,11 +24,13 @@ private slots:
 
     void config_clicked();
 
-    void on_apply_btn_pressed();
+//    void on_apply_btn_pressed();
 
-    void on_apply_btn_released();
+//    void on_apply_btn_released();
 
     void on_openFolder_clicked();
+
+    void on_apply_btn_clicked();
 
 private:
     QMovie* qGif_pressed;

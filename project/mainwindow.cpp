@@ -75,6 +75,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateLocatState()
 {
+    cfg=new Config("Config.ini");
     QVariant var=cfg->Get("Config","Location");
     if(var.isValid())
     {
@@ -99,10 +100,91 @@ void MainWindow::config_clicked()
 }
 
 
-void MainWindow::on_apply_btn_pressed()
+//void MainWindow::on_apply_btn_pressed()
+//{
+//    qDebug()<<"apply_Btn pressed";
+//    updateLocatState();
+//    if(*this->loct==QString::fromLocal8Bit("NULL"))
+//    {
+//        qDebug()<<"Location uninitialized.";
+//        ui->statusbar->setStyleSheet("font-size:10px");
+//        ui->statusbar->setStyleSheet("color:red");
+//        ui->statusbar->showMessage(tr("保存路径未初始化"));
+//        return;
+//    }
+//    ui->apply_btn->setEnabled(true);
+//    ui->openFolder->setEnabled(true);
+//    ui->apply_lbl->show();
+//    for(int i=0;i<=8;i++)
+//    {
+//        ui->apply_lbl->setStyleSheet(this->btn_list[i]);
+//        QThread::msleep(125);
+//    }
+
+//    getPicPath();
+//    QVector<QString> filenamelist;
+//    if(getPicName(prefix,filenamelist))
+//    {
+//        qDebug()<<"getPicNameList success!";
+//    }
+
+//    qDebug()<<"++++++++++++++++picNames+++++++++++++++++";
+
+//    for(int i=0;i<filenamelist.size();i++)
+//    {
+//        qDebug()<<filenamelist[i];
+//    }
+
+//    qDebug()<<"++++++++++++++++picNames+++++++++++++++++";
+
+//    ui->statusbar->setStyleSheet("font-size:11px;color:green");
+
+//    if(storeIni(filenamelist,*loct))
+//    {
+//        ui->statusbar->showMessage(tr("锁屏壁纸提取成功！"),200000);
+//        qDebug()<<"store FileName Success!";
+//        return;
+//    }
+
+//    ui->statusbar->showMessage(tr("锁屏壁纸提取失败！"),200000);
+//}
+
+
+//void MainWindow::on_apply_btn_released()
+//{
+//    qDebug()<<"pushBtn released";
+//    ui->apply_lbl->setMovie(this->qGif_released);
+//    ui->apply_lbl->show();
+//    this->qGif_released->start();
+//    ui->apply_lbl->setMovie(this->qGif_pressed);
+//    ui->apply_lbl->show();
+//    this->qGif_pressed->start();
+//}
+
+
+void MainWindow::on_openFolder_clicked()
 {
-    qDebug()<<"apply_Btn pressed";
+    qDebug()<<"openFolder_Btn pressed";
     updateLocatState();
+    if(*this->loct==QString::fromLocal8Bit("NULL"))
+    {
+        qDebug()<<"Location uninitialized.";
+        ui->statusbar->setStyleSheet("font-size:11px");
+        ui->statusbar->setStyleSheet("color:red");
+        ui->statusbar->showMessage(tr("保存路径未初始化"));
+        return;
+    }
+    //Load FileStoreLocation
+    qDebug()<<"Open Folder clicked";
+    QDesktopServices::openUrl(QUrl::fromLocalFile(*loct));
+}
+
+
+void MainWindow::on_apply_btn_clicked()
+{
+    qDebug()<<"apply_Btn clicked";
+    updateLocatState();
+    qDebug()<<*this->loct;
     if(*this->loct==QString::fromLocal8Bit("NULL"))
     {
         qDebug()<<"Location uninitialized.";
@@ -111,6 +193,14 @@ void MainWindow::on_apply_btn_pressed()
         ui->statusbar->showMessage(tr("保存路径未初始化"));
         return;
     }
+    QLabel* label =new QLabel(this);
+    label->setFrameStyle(QFrame::Box|QFrame::Sunken);
+    label->setStyleSheet("font-size:10px");
+    label->setStyleSheet("color:black");
+    label->setStyleSheet("font-style:italic");
+    label->setText("保存路径已初始化");
+    ui->statusbar->addPermanentWidget(label);
+
     ui->apply_btn->setEnabled(true);
     ui->openFolder->setEnabled(true);
     ui->apply_lbl->show();
@@ -142,39 +232,10 @@ void MainWindow::on_apply_btn_pressed()
     {
         ui->statusbar->showMessage(tr("锁屏壁纸提取成功！"),200000);
         qDebug()<<"store FileName Success!";
+        ui->apply_btn->setStyleSheet("border-image: url(:/btn/btn_9.png)");
         return;
     }
-
     ui->statusbar->showMessage(tr("锁屏壁纸提取失败！"),200000);
-}
-
-
-void MainWindow::on_apply_btn_released()
-{
-    qDebug()<<"pushBtn released";
-    ui->apply_lbl->setMovie(this->qGif_released);
-    ui->apply_lbl->show();
-    this->qGif_released->start();
-    ui->apply_lbl->setMovie(this->qGif_pressed);
-    ui->apply_lbl->show();
-    this->qGif_pressed->start();
-}
-
-
-void MainWindow::on_openFolder_clicked()
-{
-    qDebug()<<"openFolder_Btn pressed";
-    updateLocatState();
-    if(*this->loct==QString::fromLocal8Bit("NULL"))
-    {
-        qDebug()<<"Location uninitialized.";
-        ui->statusbar->setStyleSheet("font-size:11px");
-        ui->statusbar->setStyleSheet("color:red");
-        ui->statusbar->showMessage(tr("保存路径未初始化"));
-        return;
-    }
-    //Load FileStoreLocation
-    qDebug()<<"Open Folder clicked";
-    QDesktopServices::openUrl(QUrl::fromLocalFile(*loct));
+    ui->apply_btn->setStyleSheet("border-image: url(:/btn/btn_0.png)");
 }
 
