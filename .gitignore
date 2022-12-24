@@ -51,3 +51,5 @@ compile_commands.json
 # QtCreator local machine specific files for imported projects
 *creator.user*
 project/README.md
+/.vs
+/WinFocus/.vs/WinFocus
