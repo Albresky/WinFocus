@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="WinFocus.Views.FocusGalleryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:animations="using:CommunityToolkit.WinUI.UI.Animations"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:WinFocus.Core.Models"
+    mc:Ignorable="d">
+
+    <Grid x:Name="ContentArea">
+        <controls:AdaptiveGridView
+            animations:Connected.ListItemElementName="itemThumbnail"
+            animations:Connected.ListItemKey="animationKeyContentGrid"
+            DesiredWidth="180"
+            IsItemClickEnabled="True"
+            ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+            ItemHeight="160"
+            ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}"
+            SelectionMode="None"
+            StretchContentForSingleRow="False">
+            <controls:AdaptiveGridView.ItemTemplate>
+                <DataTemplate x:DataType="models:ImageItem">
+                    <Grid Width="280" AutomationProperties.Name="itemThumbnail">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="1">
+                            <Image
+                                Height="100"
+                                VerticalAlignment="Top"
+                                Source="{x:Bind ImagePath}"
+                                Stretch="Fill" />
+                            <StackPanel Margin="4,0,0,8">
+                                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="{x:Bind ImageName}" />
+                                <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="{x:Bind ImageResolution}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </controls:AdaptiveGridView.ItemTemplate>
+        </controls:AdaptiveGridView>
+    </Grid>
+</Page>
