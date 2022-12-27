@@ -11,6 +11,7 @@ public sealed partial class FocusGalleryPage : Page
         get;
     }
 
+
     public FocusGalleryPage()
     {
         ViewModel = App.GetService<FocusGalleryViewModel>();

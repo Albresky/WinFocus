@@ -9,39 +9,98 @@
     xmlns:models="using:WinFocus.Core.Models"
     mc:Ignorable="d">
 
-    <Grid x:Name="ContentArea">
-        <controls:AdaptiveGridView
-            animations:Connected.ListItemElementName="itemThumbnail"
-            animations:Connected.ListItemKey="animationKeyContentGrid"
-            DesiredWidth="180"
-            IsItemClickEnabled="True"
-            ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
-            ItemHeight="160"
-            ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}"
-            SelectionMode="None"
-            StretchContentForSingleRow="False">
-            <controls:AdaptiveGridView.ItemTemplate>
-                <DataTemplate x:DataType="models:ImageItem">
-                    <Grid Width="280" AutomationProperties.Name="itemThumbnail">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-                        <StackPanel Grid.Column="1">
+        <Grid
+            Grid.Row="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <FlipView
+                Grid.Column="0"
+                MaxWidth="960"
+                MaxHeight="540"
+                BorderBrush="Black"
+                BorderThickness="1"
+                ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}">
+                <FlipView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ImageItem">
+                        <Grid>
                             <Image
-                                Height="100"
-                                VerticalAlignment="Top"
+                                VerticalAlignment="Center"
                                 Source="{x:Bind ImagePath}"
-                                Stretch="Fill" />
-                            <StackPanel Margin="4,0,0,8">
-                                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="{x:Bind ImageName}" />
+                                Stretch="Uniform" />
+                            <StackPanel
+                                Grid.Column="1"
+                                Margin="40,0,0,8"
+                                VerticalAlignment="Bottom">
+                                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Wallpaper Info" />
+                                <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="{x:Bind ImageAuthor}" />
                                 <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="{x:Bind ImageResolution}" />
+
                             </StackPanel>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </controls:AdaptiveGridView.ItemTemplate>
-        </controls:AdaptiveGridView>
+                        </Grid>
+                    </DataTemplate>
+                </FlipView.ItemTemplate>
+            </FlipView>
+
+        </Grid>
+        <Grid Grid.Row="1" HorizontalAlignment="Center">
+            <PipsPager
+                Name="pipsPaper"
+                NextButtonVisibility="Collapsed"
+                Orientation="Horizontal"
+                PreviousButtonVisibility="Collapsed" />
+        </Grid>
+        <Grid
+            Grid.Row="2"
+            Margin="0,20,0,20"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <ListView
+                ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}"
+                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                ScrollViewer.HorizontalScrollMode="Enabled"
+                ScrollViewer.IsHorizontalRailEnabled="True"
+                ScrollViewer.VerticalScrollMode="Disabled">
+
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ImageItem">
+                        <ListViewItem MaxHeight="100" Margin="0,2,0,2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Image
+                                    VerticalAlignment="Center"
+                                    Source="{x:Bind ImagePath}"
+                                    Stretch="Fill" />
+                            </Grid>
+                        </ListViewItem>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
 </Page>

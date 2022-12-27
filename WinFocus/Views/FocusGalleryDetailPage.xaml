@@ -27,7 +27,7 @@
                             Height="150"
                             Source="{x:Bind ViewModel.Item.ImagePath}"
                             Stretch="Fill"
-                            Style="{StaticResource ThumbnailImageStyle}" />
+                           />
                     </Grid>
 
                     <TextBlock
