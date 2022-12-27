@@ -4,7 +4,6 @@ using Microsoft.UI.Xaml.Controls;
 using WinFocus.Activation;
 using WinFocus.Contracts.Services;
 using WinFocus.Views;
-
 namespace WinFocus.Services;
 
 public class ActivationService : IActivationService
