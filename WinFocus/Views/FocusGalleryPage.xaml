@@ -26,6 +26,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <FlipView
+                x:Name="myFlipView"
                 Grid.Column="0"
                 MaxWidth="960"
                 MaxHeight="540"
@@ -60,7 +61,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <StackPanel>
-                <Button>
+                <Button Click="btn_setAsBg_clicked">
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE771;" />
                 </Button>
             </StackPanel>

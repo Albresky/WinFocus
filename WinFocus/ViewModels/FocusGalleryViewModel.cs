@@ -15,7 +15,7 @@ namespace WinFocus.ViewModels;
 
 public class FocusGalleryViewModel : ObservableRecipient, INavigationAware
 {
-    private FocusGalleryPage page;
+    private FocusGalleryPage? page;
     private readonly INavigationService _navigationService;
     private readonly IImageDataService _imageDataService;
 
@@ -29,7 +29,8 @@ public class FocusGalleryViewModel : ObservableRecipient, INavigationAware
     {
         get;
     }
-    
+
+
     public ObservableCollection<ImageItem> Source { get; } = new ObservableCollection<ImageItem>();
 
     public FocusGalleryViewModel(INavigationService navigationService, IImageDataService imageDataService)
@@ -43,7 +44,7 @@ public class FocusGalleryViewModel : ObservableRecipient, INavigationAware
     public async void OnNavigatedTo(object parameter)
     {
         Source.Clear();
-        
+
         // TODO: Replace with real data.
         var data = await _imageDataService.GetImageGridDataAsync();
         foreach (var item in data)
@@ -71,12 +72,16 @@ public class FocusGalleryViewModel : ObservableRecipient, INavigationAware
 
     private async void DisplayToDoDialog()
     {
-        ContentDialog dialog = new ContentDialog();
-        dialog.XamlRoot = page.XamlRoot;
-        dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-        dialog.Title = "ToDo";
-        dialog.Content = "The detail page of these images is not avaliable right now.";
-        dialog.CloseButtonText = "I'll be waiting!";
-        await dialog.ShowAsync();
+        if (page != null)
+        {
+            ContentDialog dialog = new ContentDialog();
+            dialog.XamlRoot = page.XamlRoot;
+            dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+            dialog.Title = "ToDo";
+            dialog.Content = "The detail page of these images is not avaliable right now.";
+            dialog.CloseButtonText = "I'll be waiting!";
+            await dialog.ShowAsync();
+        }
+
     }
 }
