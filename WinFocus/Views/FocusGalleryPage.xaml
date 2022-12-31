@@ -25,31 +25,35 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <FlipView
-                x:Name="myFlipView"
-                Grid.Column="0"
-                MaxWidth="960"
-                MaxHeight="540"
-                ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}">
-                <FlipView.ItemTemplate>
-                    <DataTemplate x:DataType="models:ImageItem">
-                        <Grid>
-                            <Image
-                                VerticalAlignment="Center"
-                                Source="{x:Bind ImagePath}"
-                                Stretch="Uniform" />
-                            <StackPanel
-                                Grid.Column="1"
-                                Margin="40,0,0,8"
-                                VerticalAlignment="Bottom">
-                                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Wallpaper Info" />
-                                <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="{x:Bind ImageAuthor}" />
-                                <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="{x:Bind ImageResolution}" />
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </FlipView.ItemTemplate>
-            </FlipView>
+
+            <StackPanel>
+                <FlipView
+                    x:Name="myFlipView"
+                    Grid.Column="0"
+                    MaxWidth="960"
+                    MaxHeight="540"
+                    ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}">
+                    <FlipView.ItemTemplate>
+                        <DataTemplate x:DataType="models:ImageItem">
+                            <Grid>
+                                <Image
+                                    VerticalAlignment="Center"
+                                    Source="{x:Bind ImagePath}"
+                                    Stretch="Uniform" />
+                                <StackPanel
+                                    Grid.Column="1"
+                                    Margin="40,0,0,8"
+                                    VerticalAlignment="Bottom">
+                                    <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Wallpaper Info" />
+                                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="{x:Bind ImageAuthor}" />
+                                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="{x:Bind ImageResolution}" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </FlipView.ItemTemplate>
+                </FlipView>
+            </StackPanel>
+
         </Grid>
 
         <Grid
@@ -60,19 +64,29 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <StackPanel>
-                <Button Click="btn_setAsBg_clicked">
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE771;" />
-                </Button>
-            </StackPanel>
+            <DropDownButton Content="Set in">
+                <DropDownButton.Flyout>
+                    <MenuFlyout Placement="Bottom">
+                        <MenuFlyoutItem Click="DropDownItemClicked" Text="Fill" />
+                        <MenuFlyoutItem Click="DropDownItemClicked" Text="Fit" />
+                        <MenuFlyoutItem Click="DropDownItemClicked" Text="Stretch" />
+                        <MenuFlyoutItem Click="DropDownItemClicked" Text="Tile" />
+                        <MenuFlyoutItem Click="DropDownItemClicked" Text="Center" />
+                        <MenuFlyoutItem Click="DropDownItemClicked" Text="Stretch" />
+                    </MenuFlyout>
+                </DropDownButton.Flyout>
+            </DropDownButton>
         </Grid>
 
         <Grid Grid.Row="1" HorizontalAlignment="Center">
             <PipsPager
                 Name="pipsPaper"
+                MaxVisiblePips="10"
                 NextButtonVisibility="Collapsed"
+                NumberOfPages="{x:Bind ViewModel.Source.Count}"
                 Orientation="Horizontal"
-                PreviousButtonVisibility="Collapsed" />
+                PreviousButtonVisibility="Collapsed"
+                SelectedPageIndex="{x:Bind Path=myFlipView.SelectedIndex, Mode=TwoWay}" />
         </Grid>
 
         <Grid
