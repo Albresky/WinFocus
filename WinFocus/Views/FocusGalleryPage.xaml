@@ -59,9 +59,11 @@
         <Grid
             Grid.Row="0"
             Grid.Column="1"
-            Margin="0,0,0,0"
-            HorizontalAlignment="Right">
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top">
+
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <DropDownButton Content="Set in">
@@ -105,11 +107,14 @@
                 CornerRadius="6" />
 
             <ListView
+                AllowFocusOnInteraction="False"
                 ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}"
                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                 ScrollViewer.HorizontalScrollMode="Enabled"
                 ScrollViewer.IsHorizontalRailEnabled="True"
-                ScrollViewer.VerticalScrollMode="Disabled">
+                ScrollViewer.VerticalScrollMode="Disabled"
+                SelectedIndex="{x:Bind Path=myFlipView.SelectedIndex, Mode=TwoWay}"
+                SelectionChanged="ListsView_SelectionChanged">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" />
@@ -124,9 +129,11 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Image
+                                    Margin="4"
                                     VerticalAlignment="Center"
                                     Source="{x:Bind ImagePath}"
                                     Stretch="Fill" />
+                                <Border CornerRadius="6" />
                             </Grid>
                         </ListViewItem>
                     </DataTemplate>
