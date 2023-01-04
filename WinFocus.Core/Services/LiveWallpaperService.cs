@@ -1,4 +1,5 @@
-﻿using Vanara.PInvoke;
+﻿using System.Diagnostics;
+using Vanara.PInvoke;
 using static Vanara.PInvoke.User32;
 
 
@@ -12,7 +13,6 @@ public static class LiveWallpaperService
     {
         progman = FindWindow("Progman", "Program Manager");
     }
-
     
     private static bool GetWorkerW()
     {
@@ -39,9 +39,14 @@ public static class LiveWallpaperService
             if (IntPtr.Zero != p)
             {
                 m_workerw = FindWindowEx(IntPtr.Zero, tophandle, "WorkerW", null);
+                return false;
             }
             return true;
         }), IntPtr.Zero);
+        if (m_workerw != HWND.NULL)
+        {
+            return true;
+        }
         return false;
     }
 
@@ -53,7 +58,7 @@ public static class LiveWallpaperService
 
             /// <summary>
             // In WinFocus, the child_hwnd is the HWND of a 'new Window()',
-            // which needs to be 'Activated()'.
+            // which needs to be 'Activate()'.
             /// </summary>
             SetParent(child_hwnd, m_workerw);
         }
