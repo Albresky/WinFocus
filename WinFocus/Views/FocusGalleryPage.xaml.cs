@@ -1,7 +1,10 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Windows.UI;
+using WinFocus.Core.Helpers;
 using WinFocus.Core.Services;
 using WinFocus.ViewModels;
+using WinUIEx;
 
 namespace WinFocus.Views;
 
@@ -19,10 +22,12 @@ public sealed partial class FocusGalleryPage : Page
         ViewModel = App.GetService<FocusGalleryViewModel>();
         ViewModel.SetCurrentPage(this);
         InitializeComponent();
-        //var testW = new Window();
-        //testW.SetWindowSize(800, 600);
-        //testW.Activate();
-        //LiveWallpaperService.SetLiveWallpaper(testW.GetWindowHandle());
+    //     LiveWallpaperPage liveWallpaperPage = new();
+    //     liveWallpaperPage.SetWindowSize(3840, 2160);
+    //     liveWallpaperPage.Activate();
+    //     liveWallpaperPage.CenterOnScreen(); liveWallpaperPage.Maximize();
+    //     LiveWallpaperService.SetLiveWallpaper(liveWallpaperPage.GetWindowHandle());
+    //     LiveWallpaperWindow.RemoveTitleBar(liveWallpaperPage.GetWindowHandle());
     }
 
     private void DropDownItemClicked(object sender, RoutedEventArgs e)

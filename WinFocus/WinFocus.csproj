@@ -15,7 +15,11 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="Assets\Video\Video.mp4" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Controls\DialogInfo.xaml" />
+    <None Remove="Views\LiveWallpaperPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +43,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Views\LiveWallpaperPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Controls\DialogInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
