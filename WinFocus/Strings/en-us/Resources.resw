@@ -68,7 +68,10 @@
     <value>Main</value>
   </data>
   <data name="Shell_FocusGallery.Content" xml:space="preserve">
-    <value>FocusGallery</value>
+    <value>Focus Gallery</value>
+  </data>
+	<data name="Shell_LiveWallpaperGallery.Content" xml:space="preserve">
+    <value>Live Wallpaper</value>
   </data>
   <data name="Settings_Personalization.Text" xml:space="preserve">
     <value>Personalization</value>

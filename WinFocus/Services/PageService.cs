@@ -15,7 +15,7 @@ public class PageService : IPageService
     public PageService()
     {
         Configure<FocusGalleryViewModel, FocusGalleryPage>();
-        Configure<FocusGalleryDetailViewModel, FocusGalleryDetailPage>();
+        Configure<LiveWallpaperGalleryViewModel, LiveWallpaperGalleryPage>();
         Configure<SettingsViewModel, SettingsPage>();
     }
 

@@ -12,19 +12,12 @@ public sealed partial class LiveWallpaperPage : Window
     public LiveWallpaperPage()
     {
         this.InitializeComponent();
-        //ExtendsContentIntoTitleBar = true;
-        //this.Maximize();
-
-        //var presenter = GetAppWindowAndPresenter();
-        //presenter.IsMaximizable = false;
-        //presenter.IsMinimizable = false;
-        //presenter.IsResizable = false;
-        Play();
+        //Play();
     }
 
     async void Play()
     {
-        var file = await StorageFile.GetFileFromPathAsync("C:\\Users\\Albre\\Downloads\\Video\\Sunrise.mp4");
+        var file = await StorageFile.GetFileFromPathAsync("C:\\Users\\Albre\\Downloads\\Video\\Ink.mp4");
         var source = MediaSource.CreateFromStorageFile(file);
         MediaPlayerElement.AutoPlay = true;
         MediaPlayerElement.IsFullWindow = true;

@@ -66,7 +66,7 @@ public class FocusGalleryViewModel : ObservableRecipient, INavigationAware
             //return;
             // ToDo
             _navigationService.SetListDataItemForNextConnectedAnimation(clickedItem);
-            _navigationService.NavigateTo(typeof(FocusGalleryDetailViewModel).FullName!, clickedItem.ImagePath);
+            //_navigationService.NavigateTo(typeof(FocusGalleryDetailViewModel).FullName!, clickedItem.ImagePath);
         }
     }
 

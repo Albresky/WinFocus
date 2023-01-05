@@ -58,13 +58,14 @@ public partial class App : Application
 
             // Core Services
             services.AddSingleton<IImageDataService, ImageDataService>();
+            services.AddSingleton<IVideoDataService, VideoDataService>();
             services.AddSingleton<IFileService, FileService>();
 
             // Views and ViewModels
             services.AddTransient<SettingsViewModel>();
             services.AddTransient<SettingsPage>();
-            services.AddTransient<FocusGalleryDetailViewModel>();
-            services.AddTransient<FocusGalleryDetailPage>();
+            services.AddTransient<LiveWallpaperGalleryPage>();
+            services.AddTransient<LiveWallpaperGalleryViewModel>();
             services.AddTransient<FocusGalleryViewModel>();
             services.AddTransient<FocusGalleryPage>();
             services.AddTransient<ShellPage>();

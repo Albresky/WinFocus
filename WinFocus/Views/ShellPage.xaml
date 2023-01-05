@@ -52,6 +52,11 @@
                         <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xEE3F;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem x:Uid="Shell_LiveWallpaperGallery" helpers:NavigationHelper.NavigateTo="WinFocus.ViewModels.LiveWallpaperGalleryViewModel">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xEE4A;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
             <NavigationView.HeaderTemplate>
                 <DataTemplate>
