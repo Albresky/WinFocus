@@ -1,9 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using WinFocus.Contracts.Services;
 using WinFocus.Contracts.ViewModels;
 using WinFocus.Core.Contracts.Services;
@@ -41,8 +37,8 @@ public class LiveWallpaperGalleryViewModel : ObservableRecipient, INavigationAwa
         {
             Source.Add(item);
         }
-        page.SetGridViewSource(Source);
-        page.setThumbnail(Source.ElementAt(0).Thumbnail);
+        page?.SetGridViewSource(Source);
+        page?.setThumbnail(Source.ElementAt(0).Thumbnail);
     }
 
     public void OnNavigatedFrom()

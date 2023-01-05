@@ -13,6 +13,8 @@
             <Border BorderThickness="1" CornerRadius="4" />
             <GridView
                 x:Name="VideoGridView"
+                MinWidth="500"
+                MinHeight="500"
                 AllowDrop="False"
                 CanDragItems="False"
                 CanReorderItems="False"
@@ -25,8 +27,7 @@
                         <Image
                             Width="190"
                             Height="130"
-                            AutomationProperties.AccessibilityView="Raw"
-                            Source="{x:Bind Path=Thumbnail}"
+                            Source="{x:Bind Thumbnail}"
                             Stretch="Fill" />
                         <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="{x:Bind VideoName}" />
                     </StackPanel>
@@ -53,7 +54,7 @@
                 AutomationProperties.AccessibilityView="Raw"
                 Stretch="Fill" />
 
-            <Button Content="Set As Wallpaper" />
+            <Button Click="Btn_Click" Content="Set As Wallpaper" />
         </StackPanel>
     </StackPanel>
 </Page>

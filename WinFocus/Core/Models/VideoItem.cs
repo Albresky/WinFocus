@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.UI.Xaml.Media.Imaging;
+﻿using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace WinFocus.Core.Models;
 public class VideoItem
@@ -15,26 +10,31 @@ public class VideoItem
 
     public string VideoPath
     {
-        get;set;
+        get; set;
     }
-    
+
     public int VideoWidth
     {
-        get;set;
+        get; set;
     }
-    
+
     public int VideoHeight
     {
-        get;set;
+        get; set;
     }
 
     public int VideoSize
     {
-        get; set;    
+        get; set;
     }
-    
+
     public BitmapImage Thumbnail
     {
-        get;set;
+        get; set;
+    }
+
+    public string ThumbnailPath
+    {
+        get; set;
     }
 }

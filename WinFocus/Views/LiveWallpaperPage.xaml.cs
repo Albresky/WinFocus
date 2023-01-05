@@ -9,15 +9,20 @@ namespace WinFocus.Views;
 
 public sealed partial class LiveWallpaperPage : Window
 {
+    public string VideoFile
+    {
+       set;
+       private get;
+    }
+
     public LiveWallpaperPage()
     {
         this.InitializeComponent();
-        //Play();
     }
 
-    async void Play()
+    public async void Play()
     {
-        var file = await StorageFile.GetFileFromPathAsync("C:\\Users\\Albre\\Downloads\\Video\\Ink.mp4");
+        var file = await StorageFile.GetFileFromPathAsync(VideoFile);
         var source = MediaSource.CreateFromStorageFile(file);
         MediaPlayerElement.AutoPlay = true;
         MediaPlayerElement.IsFullWindow = true;

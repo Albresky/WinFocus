@@ -22,14 +22,6 @@ public sealed partial class FocusGalleryPage : Page
         ViewModel = App.GetService<FocusGalleryViewModel>();
         ViewModel.SetCurrentPage(this);
         InitializeComponent();
-
-
-        //LiveWallpaperPage liveWallpaperPage = new();
-        //liveWallpaperPage.SetWindowSize(3840, 2160);
-        //liveWallpaperPage.Activate();
-        //liveWallpaperPage.CenterOnScreen(); liveWallpaperPage.Maximize();
-        //LiveWallpaperService.SetLiveWallpaper(liveWallpaperPage.GetWindowHandle());
-        //LiveWallpaperWindow.RemoveTitleBar(liveWallpaperPage.GetWindowHandle());
     }
 
     private void DropDownItemClicked(object sender, RoutedEventArgs e)
