@@ -9,5 +9,5 @@ public interface IVideoDataService
 {
     Task<IEnumerable<VideoItem>> GetVideoDataAsync();
     Task<IEnumerable<uint>> GetResolutionAsync(StorageFile videoFile);
-    Task<ImageStream> GetThumbnailFromVideo(StorageFile videoFile,int width,int height);
+    Task<ImageStream> GetThumbnailFromVideoAsync(StorageFile videoFile,int width,int height);
 }

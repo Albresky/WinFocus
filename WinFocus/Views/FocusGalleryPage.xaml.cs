@@ -1,10 +1,7 @@
-﻿using Microsoft.UI.Xaml;
+﻿using System.Diagnostics;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Windows.UI;
-using WinFocus.Core.Helpers;
-using WinFocus.Core.Services;
 using WinFocus.ViewModels;
-using WinUIEx;
 
 namespace WinFocus.Views;
 
@@ -19,6 +16,7 @@ public sealed partial class FocusGalleryPage : Page
 
     public FocusGalleryPage()
     {
+        Trace.WriteLine("FocusGalleryPage() called.");
         ViewModel = App.GetService<FocusGalleryViewModel>();
         ViewModel.SetCurrentPage(this);
         InitializeComponent();

@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:WinFocus.Core.Models"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    NavigationCacheMode="Required"
     mc:Ignorable="d">
 
     <StackPanel Orientation="Horizontal">
@@ -27,7 +28,7 @@
                         <Image
                             Width="190"
                             Height="130"
-                            Source="{x:Bind Thumbnail}"
+                            Source="{x:Bind ThumbnailPath}"
                             Stretch="Fill" />
                         <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="{x:Bind VideoName}" />
                     </StackPanel>

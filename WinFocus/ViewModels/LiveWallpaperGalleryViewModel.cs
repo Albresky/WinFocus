@@ -37,8 +37,8 @@ public class LiveWallpaperGalleryViewModel : ObservableRecipient, INavigationAwa
         {
             Source.Add(item);
         }
-        page?.SetGridViewSource(Source);
-        page?.setThumbnail(Source.ElementAt(0).Thumbnail);
+        //page?.SetGridViewSource(Source);
+        //page?.setThumbnail(Source.ElementAt(0).Thumbnail);
     }
 
     public void OnNavigatedFrom()
