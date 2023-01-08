@@ -7,6 +7,7 @@ public static class LiveWallpaperService
 {
     private static readonly HWND progman = HWND.NULL;
     private static HWND m_workerw = HWND.NULL;
+    private static HWND m_livewallpaper_window = HWND.NULL;
     public static bool IsSet = false;
 
     static LiveWallpaperService()
@@ -62,4 +63,12 @@ public static class LiveWallpaperService
             SetParent(child_hwnd, m_workerw);
         }
     }
+
+    //public static void StopLiveWallpaper()
+    //{
+    //    if (m_livewallpaper_window != HWND.NULL)
+    //    {
+
+    //    }
+    //}
 }

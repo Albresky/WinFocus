@@ -73,11 +73,13 @@
                         ValueChanged="Slider_ValueChanged" />
                 </StackPanel>
 
-                <Button
-                    Margin="0,10,0,10"
-                    HorizontalAlignment="Center"
-                    Click="Btn_Click"
-                    Content="Set Live Wallpaper" />
+                <ToggleSwitch
+                    Toggled="ToggleSwitch_Toggled"
+                    Header="Set As Wallpaper"
+                    IsOn="False"
+                    OffContent="Do Apply"
+                    OnContent="Working" />
+
                 <Button
                     HorizontalAlignment="Center"
                     Click="Btn_Add_Click"

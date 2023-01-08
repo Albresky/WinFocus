@@ -1,13 +1,10 @@
 using System.Diagnostics;
-using Microsoft.UI;
-using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Vanara.Extensions.Reflection;
 using Windows.Graphics.Display;
 using Windows.Media.Core;
-using Windows.Media.Playback;
 using Windows.Storage;
+using WinUIEx;
 using static WinFocus.Core.Services.SystemService;
 
 namespace WinFocus.Views;
@@ -16,8 +13,8 @@ public sealed partial class LiveWallpaperPage : Window
 {
     public string VideoFile
     {
-       set;
-       private get;
+        set;
+        private get;
     }
 
     public LiveWallpaperPage()
@@ -34,6 +31,19 @@ public sealed partial class LiveWallpaperPage : Window
         MediaPlayerElement.MediaPlayer.IsLoopingEnabled = true;
         MediaPlayerElement.Source = source;
         MediaPlayerElement.MediaPlayer.AutoPlay = true;
+    }
+
+    public void Stop()
+    {
+        if (MediaPlayerElement != null )
+        {
+            var player = MediaPlayerElement.MediaPlayer;
+            if (player != null)
+            {
+                player.Pause();
+                this.Hide();
+            }
+        }
     }
 
     public static ScreenSize GetSysScreenSize()

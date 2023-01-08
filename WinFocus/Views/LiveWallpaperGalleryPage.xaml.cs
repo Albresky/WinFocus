@@ -10,6 +10,7 @@ using WinFocus.Core.Helpers;
 using WinFocus.Core.Models;
 using WinFocus.Core.Services;
 using WinFocus.ViewModels;
+using WinUIEx;
 
 namespace WinFocus.Views;
 
@@ -55,12 +56,12 @@ public sealed partial class LiveWallpaperGalleryPage : Page
     {
         liveWallpaperPage = new();
         _windowHandle = liveWallpaperPage.GetWindowHandle();
-        liveWallpaperPage.Hide();
         var screenSize = DisplayArea.Primary.OuterBounds;
         liveWallpaperPage.SetWindowSize(screenSize.Width, screenSize.Height);
         liveWallpaperPage.Activate();
         liveWallpaperPage.CenterOnScreen();
         LiveWallpaperWindow.RemoveTitleBar(liveWallpaperPage.GetWindowHandle());
+        liveWallpaperPage.Hide();
     }
 
     private void GridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -83,15 +84,9 @@ public sealed partial class LiveWallpaperGalleryPage : Page
         }
     }
 
-    private void Btn_Click(object sender, RoutedEventArgs e)
+    private void Btn_SetAsBg_Click(object sender, RoutedEventArgs e)
     {
-        var index = VideoGridView.SelectedIndex;
-        if (liveWallpaperPage != null)
-        {
-            liveWallpaperPage.VideoFile = ViewModel.Source.ElementAt(index).VideoPath;
-            liveWallpaperPage.Play();
-            LiveWallpaperService.SetLiveWallpaper(_windowHandle);
-        }
+
         Trace.WriteLine("Button Clicked.");
     }
 
@@ -129,5 +124,28 @@ public sealed partial class LiveWallpaperGalleryPage : Page
         Trace.WriteLine("OnNavigatingFrom()");
         base.OnNavigatingFrom(e);
 
+    }
+
+    private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+    {
+        var ts = sender as ToggleSwitch;
+        if (ts != null)
+        {
+            if (ts.IsOn)
+            {
+                var index = VideoGridView.SelectedIndex;
+                if (liveWallpaperPage != null)
+                {
+                    liveWallpaperPage.Show();
+                    liveWallpaperPage.VideoFile = ViewModel.Source.ElementAt(index).VideoPath;
+                    liveWallpaperPage.Play();
+                    LiveWallpaperService.SetLiveWallpaper(_windowHandle);
+                }
+            }
+            else
+            {
+                liveWallpaperPage.Stop();
+            }
+        }
     }
 }
