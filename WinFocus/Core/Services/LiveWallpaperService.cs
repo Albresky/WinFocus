@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Vanara.PInvoke;
+﻿using Vanara.PInvoke;
 using static Vanara.PInvoke.User32;
 
 
@@ -8,19 +7,20 @@ public static class LiveWallpaperService
 {
     private static readonly HWND progman = HWND.NULL;
     private static HWND m_workerw = HWND.NULL;
+    public static bool IsSet = false;
 
     static LiveWallpaperService()
     {
         progman = FindWindow("Progman", "Program Manager");
     }
-    
+
     private static bool GetWorkerW()
     {
         if (FindWorkW())
         {
             return true;
         }
-        IntPtr result = IntPtr.Zero;
+        var result = IntPtr.Zero;
         SendMessageTimeout(progman, 0x052C, new IntPtr(0), IntPtr.Zero, 0, 1000, ref result);
         if (!FindWorkW())
         {
@@ -29,12 +29,12 @@ public static class LiveWallpaperService
         }
         return true;
     }
-    
+
     private static bool FindWorkW()
     {
         EnumWindows(new EnumWindowsProc((tophandle, topparamhandle) =>
         {
-            HWND p = FindWindowEx(tophandle, HWND.NULL, "SHELLDLL_DefView", string.Empty);
+            var p = FindWindowEx(tophandle, HWND.NULL, "SHELLDLL_DefView", string.Empty);
 
             if (IntPtr.Zero != p)
             {
@@ -52,10 +52,9 @@ public static class LiveWallpaperService
 
     public static void SetLiveWallpaper(HWND child_hwnd)
     {
-        if (GetWorkerW())
+        if (!IsSet && GetWorkerW())
         {
-            // ToDo
-
+            IsSet = true;
             /// <summary>
             // In WinFocus, the child_hwnd is the HWND of a 'new Window()',
             // which needs to be 'Activate()'.

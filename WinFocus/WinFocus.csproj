@@ -15,6 +15,7 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="Assets\add.png" />
     <Content Remove="Assets\Video\Video.mp4" />
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,9 @@ using System.Diagnostics;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Media.Imaging;
+using Microsoft.UI.Xaml.Navigation;
 using WinFocus.Core.Helpers;
 using WinFocus.Core.Models;
 using WinFocus.Core.Services;
@@ -13,7 +15,8 @@ namespace WinFocus.Views;
 
 public sealed partial class LiveWallpaperGalleryPage : Page
 {
-    LiveWallpaperPage? liveWallpaperPage = null;
+    private LiveWallpaperPage? liveWallpaperPage = null;
+    private IntPtr _windowHandle = IntPtr.Zero;
     private int gridview_index = 0;
     public void SetGridViewSource(ObservableCollection<VideoItem> source) => VideoGridView.ItemsSource = source;
 
@@ -29,7 +32,7 @@ public sealed partial class LiveWallpaperGalleryPage : Page
         ViewModel.SetCurrentPage(this);
         this.InitializeComponent();
         Init();
-        this.UpdateLayout();
+        UpdateLayout();
     }
 
     private void Init()
@@ -40,19 +43,18 @@ public sealed partial class LiveWallpaperGalleryPage : Page
 
     private void UpdateThumbnails()
     {
-        Trace.WriteLine("UpdateThumbnails()...");
-        if (ViewModel != null && ViewModel.Source.Count > 0)
-        {
-            //foreach(Image image in VideoGridView.Items)
-            //{
-            //    image.Source = new BitmapImage(new Uri(ViewModel.Source.ElementAt(gridview_index).ThumbnailPath));
-            //}
-        }
+        var addImage = new Image();
+        addImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Add.png"));
+        addImage.Width = 130;
+        addImage.Height = 130;
+        addImage.Stretch = Microsoft.UI.Xaml.Media.Stretch.UniformToFill;
+        VideoGridView.Items.Add(addImage);
     }
 
     private void InitLiveWallpaperPage()
     {
         liveWallpaperPage = new();
+        _windowHandle = liveWallpaperPage.GetWindowHandle();
         liveWallpaperPage.Hide();
         var screenSize = DisplayArea.Primary.OuterBounds;
         liveWallpaperPage.SetWindowSize(screenSize.Width, screenSize.Height);
@@ -64,7 +66,6 @@ public sealed partial class LiveWallpaperGalleryPage : Page
     private void GridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var gv = sender as GridView;
-
         if (gv != null)
         {
             gridview_index = gv.SelectedIndex;
@@ -80,25 +81,53 @@ public sealed partial class LiveWallpaperGalleryPage : Page
             txtSize.Text = (videoItem.VideoSize / 1000).ToString();
             txtResolution.Text = $"{videoItem.VideoWidth}x{videoItem.VideoHeight}";
         }
-
     }
 
     private void Btn_Click(object sender, RoutedEventArgs e)
     {
         var index = VideoGridView.SelectedIndex;
-
         if (liveWallpaperPage != null)
         {
             liveWallpaperPage.VideoFile = ViewModel.Source.ElementAt(index).VideoPath;
             liveWallpaperPage.Play();
-            liveWallpaperPage.Show();
-            LiveWallpaperService.SetLiveWallpaper(liveWallpaperPage.GetWindowHandle());
+            LiveWallpaperService.SetLiveWallpaper(_windowHandle);
         }
         Trace.WriteLine("Button Clicked.");
     }
 
-    private void Btn_Update_Click(object sender, RoutedEventArgs e)
+    private async void Btn_Add_Click(object sender, RoutedEventArgs e)
     {
-        UpdateThumbnails();
+        var result = await SystemService.GetFilesInFilePickerAsync(new string[] { ".mp4", ".mkv" });
+        if (result.Count > 0)
+        {
+            foreach (var item in result)
+            {
+                await ViewModel.AddVideoItemAsync(item.Path);
+            }
+        }
+    }
+
+    private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+    {
+        var slider = sender as Slider;
+        if (slider != null && liveWallpaperPage != null)
+        {
+            liveWallpaperPage.SetVolume(slider.Value);
+        }
+    }
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        Trace.WriteLine("OnNavigatingTo()");
+        base.OnNavigatedTo(e);
+
+        VideoGridView.SelectedIndex = gridview_index = 0;
+        UpdateVideoInfo(gridview_index);
+    }
+
+    protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+    {
+        Trace.WriteLine("OnNavigatingFrom()");
+        base.OnNavigatingFrom(e);
+
     }
 }

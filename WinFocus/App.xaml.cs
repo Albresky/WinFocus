@@ -15,6 +15,8 @@ namespace WinFocus;
 
 public partial class App : Application
 {
+    internal Window m_window;
+
     public IHost Host
     {
         get;

@@ -22,41 +22,37 @@ public class VideoDataService : IVideoDataService
         }
     }
 
+    public async Task<VideoItem> CreateVideoItemAsync(string path)
+    {
+        var videoFile = await StorageFile.GetFileFromPathAsync(path);
+        var videoFileProperties = await videoFile.GetBasicPropertiesAsync();
+        var resolution = await GetResolutionAsync(videoFile);
+        var videoItem = new VideoItem
+        {
+            VideoName = $"Video {videoFile.Name}",
+            VideoPath = path,
+            VideoWidth = (int)resolution.ElementAt(0),
+            VideoHeight = (int)resolution.ElementAt(1),
+            VideoSize = videoFileProperties.Size
+        };
+        var imageStream = await GetThumbnailFromVideoAsync(videoFile, videoItem.VideoWidth, videoItem.VideoHeight);
+
+        /// <summary>
+        /// Save thumbnail of the video to a file
+        /// </summary>
+        var imgName = await SaveThumbnailAsync(imageStream, videoItem.VideoWidth, videoItem.VideoHeight, videoFile.Name);
+        videoItem.ThumbnailPath = $"{LOCAL_THUMBNAIL_CACHE_DIR}\\{imgName}";
+        return videoItem;
+    }
+
     private async Task<IEnumerable<VideoItem>> AllVideo()
     {
         var videos = new List<VideoItem>();
         var videoFullPath = Directory.GetFiles(LOCAL_VIDEO_DIR);
-        var i = 0;
         foreach (var path in videoFullPath)
         {
-            StorageFile videoFile;
-            videoFile = await StorageFile.GetFileFromPathAsync(path);
-            var videoFileProperties= await videoFile.GetBasicPropertiesAsync();
-            var resolution = await GetResolutionAsync(videoFile);
-            var videoItem = new VideoItem
-            {
-                VideoName = $"Video {i++}",
-                VideoPath = path,
-                VideoWidth = (int)resolution.ElementAt(0),
-                VideoHeight = (int)resolution.ElementAt(1),
-                VideoSize = videoFileProperties.Size
-            };
-            var imageStream = await GetThumbnailFromVideoAsync(videoFile, videoItem.VideoWidth, videoItem.VideoHeight);
-
-            /// <summary>
-            /// Get bitmapImage from imageStream
-            /// </summary>
-            //var bitmapImage = new BitmapImage();
-            //bitmapImage.SetSource(imageStream);
-            //videoItem.Thumbnail = bitmapImage;
-
-            /// <summary>
-            /// Save thumbnail of the video to a file
-            /// </summary>
-            var imgName = await SaveThumbnailAsync(imageStream, videoItem.VideoWidth, videoItem.VideoHeight, videoFile.Name);
-            videoItem.ThumbnailPath = $"{LOCAL_THUMBNAIL_CACHE_DIR}\\{imgName}";
-
-            videos.Add(videoItem);
+            var item = await CreateVideoItemAsync(path);
+            videos.Add(item);
         }
         return videos;
     }

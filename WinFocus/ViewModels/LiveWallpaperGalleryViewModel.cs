@@ -44,4 +44,10 @@ public class LiveWallpaperGalleryViewModel : ObservableRecipient, INavigationAwa
     public void OnNavigatedFrom()
     {
     }
+
+    public async Task AddVideoItemAsync(string path)
+    {
+        var videoItem= await _videoDataService.CreateVideoItemAsync(path);
+        Source.Add(videoItem);
+    }
 }

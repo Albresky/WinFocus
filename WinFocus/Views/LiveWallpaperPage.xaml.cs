@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -5,6 +6,7 @@ using Microsoft.UI.Xaml.Controls;
 using Vanara.Extensions.Reflection;
 using Windows.Graphics.Display;
 using Windows.Media.Core;
+using Windows.Media.Playback;
 using Windows.Storage;
 using static WinFocus.Core.Services.SystemService;
 
@@ -20,7 +22,7 @@ public sealed partial class LiveWallpaperPage : Window
 
     public LiveWallpaperPage()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     public async void Play()
@@ -34,7 +36,7 @@ public sealed partial class LiveWallpaperPage : Window
         MediaPlayerElement.MediaPlayer.AutoPlay = true;
     }
 
-    public ScreenSize GetSysScreenSize()
+    public static ScreenSize GetSysScreenSize()
     {
         var displayInformation = DisplayInformation.GetForCurrentView();
         return new ScreenSize
@@ -44,17 +46,14 @@ public sealed partial class LiveWallpaperPage : Window
         };
     }
 
-    //private OverlappedPresenter GetAppWindowAndPresenter()
-    //{
-    //    var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
-    //    WindowId myWndId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
-    //    var _apw = AppWindow.GetFromWindowId(myWndId);
-    //    return _apw.Presenter as OverlappedPresenter;
-    //}
+    public void SetMute()
+    {
+        MediaPlayerElement.MediaPlayer.IsMuted = true;
+    }
 
-    //public  void Maximize(this Window window)
-    //{
-    //var windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(window);
-    //Vanara.PInvoke.User32.ShowWindow(windowHandle, Vanara.PInvoke.ShowWindowCommand.SW_MAXIMIZE);
-    //}
+    public void SetVolume(double v)
+    {
+        MediaPlayerElement.MediaPlayer.Volume = v;
+        Trace.WriteLine($"Current Volume of Video:{v}");
+    }
 }
