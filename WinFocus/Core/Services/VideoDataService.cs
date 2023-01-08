@@ -31,6 +31,7 @@ public class VideoDataService : IVideoDataService
         {
             StorageFile videoFile;
             videoFile = await StorageFile.GetFileFromPathAsync(path);
+            var videoFileProperties= await videoFile.GetBasicPropertiesAsync();
             var resolution = await GetResolutionAsync(videoFile);
             var videoItem = new VideoItem
             {
@@ -38,7 +39,7 @@ public class VideoDataService : IVideoDataService
                 VideoPath = path,
                 VideoWidth = (int)resolution.ElementAt(0),
                 VideoHeight = (int)resolution.ElementAt(1),
-                VideoSize = 12000
+                VideoSize = videoFileProperties.Size
             };
             var imageStream = await GetThumbnailFromVideoAsync(videoFile, videoItem.VideoWidth, videoItem.VideoHeight);
 

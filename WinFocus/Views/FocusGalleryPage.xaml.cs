@@ -22,7 +22,6 @@ public sealed partial class FocusGalleryPage : Page
         ViewModel = App.GetService<FocusGalleryViewModel>();
         ViewModel.SetCurrentPage(this);
         InitializeComponent();
-
         Init();
     }
 
@@ -41,7 +40,6 @@ public sealed partial class FocusGalleryPage : Page
     {
         var RBs = sender as RadioButtons;
 
-
         if (RBs != null && sender is RadioButtons rb)
         {
             rbs_index = RBs.SelectedIndex;
@@ -59,7 +57,6 @@ public sealed partial class FocusGalleryPage : Page
         Trace.WriteLine("Button<SetAsWallpaper> Clicked.");
         var imagePath = ViewModel.Source.ElementAt(image_index).ImagePath;
         WallpaperService.Set(imagePath, style);
-
     }
 
     private void ListsView_SelectionChanged(object sender, SelectionChangedEventArgs e)

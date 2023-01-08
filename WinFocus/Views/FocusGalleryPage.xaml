@@ -20,6 +20,7 @@
                 x:Name="myFlipView"
                 Grid.Column="0"
                 HorizontalAlignment="Left"
+                CornerRadius="6"
                 ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}">
                 <FlipView.ItemTemplate>
                     <DataTemplate x:DataType="models:ImageItem">
@@ -55,39 +56,31 @@
                         HorizontalAlignment="Center"
                         Click="Button_SetAsWallpaper_Click"
                         Content="Set As Wallpaper" />
-                </StackPanel>
-                <!--  Wallpaper Info  -->
-                <StackPanel
-                    Margin="0,20,0,0"
-                    Padding="10"
-                    VerticalAlignment="Bottom"
-                    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-                    BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
-                    BorderThickness="1"
-                    CornerRadius="6"
-                    Orientation="Vertical">
-                    <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Wallpaper Info" />
-                    <StackPanel Margin="0,5,0,5" Orientation="Horizontal">
-                        <TextBlock
-                            FontWeight="Bold"
-                            Style="{ThemeResource CaptionTextBlockStyle}"
-                            Text="Resolution:" />
-                        <TextBlock x:Name="txtResolution" Style="{ThemeResource CaptionTextBlockStyle}" />
-                    </StackPanel>
+                    <!--  Wallpaper Info  -->
+                    <StackPanel Margin="0,20,0,0" Orientation="Vertical">
+                        <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Wallpaper Info" />
+                        <StackPanel Margin="0,5,0,5" Orientation="Horizontal">
+                            <TextBlock
+                                FontWeight="Bold"
+                                Style="{ThemeResource CaptionTextBlockStyle}"
+                                Text="Resolution:" />
+                            <TextBlock x:Name="txtResolution" Style="{ThemeResource CaptionTextBlockStyle}" />
+                        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock
-                            FontWeight="Bold"
-                            Style="{ThemeResource CaptionTextBlockStyle}"
-                            Text="Size:" />
-                        <TextBlock x:Name="txtSize" Style="{ThemeResource CaptionTextBlockStyle}" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock
-                            FontWeight="Bold"
-                            Style="{ThemeResource CaptionTextBlockStyle}"
-                            Text="Date:" />
-                        <TextBlock x:Name="txtDate" Style="{ThemeResource CaptionTextBlockStyle}" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                FontWeight="Bold"
+                                Style="{ThemeResource CaptionTextBlockStyle}"
+                                Text="Size:" />
+                            <TextBlock x:Name="txtSize" Style="{ThemeResource CaptionTextBlockStyle}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                FontWeight="Bold"
+                                Style="{ThemeResource CaptionTextBlockStyle}"
+                                Text="Date:" />
+                            <TextBlock x:Name="txtDate" Style="{ThemeResource CaptionTextBlockStyle}" />
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </Grid>

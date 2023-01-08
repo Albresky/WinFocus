@@ -9,53 +9,54 @@
     NavigationCacheMode="Required"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal">
-        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <Border BorderThickness="1" CornerRadius="4" />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid
+            Grid.Column="0"
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+            BorderThickness="1"
+            CornerRadius="4">
             <GridView
                 x:Name="VideoGridView"
-                MinWidth="500"
-                MinHeight="500"
                 AllowDrop="False"
                 CanDragItems="False"
                 CanReorderItems="False"
                 FlowDirection="LeftToRight"
                 IsItemClickEnabled="True"
-                ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}"
+                ItemsSource="{x:Bind ViewModel.Source, Mode=OneTime}"
+                SelectedIndex="0"
+                SelectionChanged="GridView_SelectionChanged"
                 SelectionMode="Single">
-                <DataTemplate x:DataType="models:VideoItem">
-                    <StackPanel>
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="models:VideoItem">
                         <Image
                             Width="190"
                             Height="130"
                             Source="{x:Bind ThumbnailPath}"
                             Stretch="Fill" />
-                        <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="{x:Bind VideoName}" />
-                    </StackPanel>
-                </DataTemplate>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+
             </GridView>
-
-
         </Grid>
-        <StackPanel Padding="4,2,4,0">
-            <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="LiveWallpaper Info" />
-            <StackPanel Margin="0,10,4,0" Orientation="Horizontal">
-                <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="Size " />
-                <TextBlock x:Name="txtSize" Style="{ThemeResource CaptionTextBlockStyle}" />
+        <Grid Grid.Column="1">
+            <StackPanel Padding="4,2,4,0">
+                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="LiveWallpaper Info" />
+                <StackPanel Margin="0,10,4,0" Orientation="Horizontal">
+                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="Size:" />
+                    <TextBlock x:Name="txtSize" Style="{ThemeResource CaptionTextBlockStyle}" />
+                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="KB" />
+                </StackPanel>
+                <StackPanel Margin="0,10,4,10" Orientation="Horizontal">
+                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="Resolution:" />
+                    <TextBlock x:Name="txtResolution" Style="{ThemeResource CaptionTextBlockStyle}" />
+                </StackPanel>
+                <Button Click="Btn_Click" Content="Set As Wallpaper" />
+                <Button Click="Btn_Update_Click" Content="Update" />
             </StackPanel>
-            <StackPanel Margin="0,10,4,10" Orientation="Horizontal">
-                <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="Resolution " />
-                <TextBlock x:Name="txtResolution" Style="{ThemeResource CaptionTextBlockStyle}" />
-            </StackPanel>
-
-            <Image
-                x:Name="thumbnail"
-                Width="190"
-                Height="130"
-                AutomationProperties.AccessibilityView="Raw"
-                Stretch="Fill" />
-
-            <Button Click="Btn_Click" Content="Set As Wallpaper" />
-        </StackPanel>
-    </StackPanel>
+        </Grid>
+    </Grid>
 </Page>

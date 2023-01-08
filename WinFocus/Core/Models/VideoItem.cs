@@ -3,6 +3,9 @@
 namespace WinFocus.Core.Models;
 public class VideoItem
 {
+    public VideoItem()
+    {
+    }
     public string VideoName
     {
         get; set;
@@ -17,13 +20,13 @@ public class VideoItem
     {
         get; set;
     }
-
+    
     public int VideoHeight
     {
         get; set;
     }
 
-    public int VideoSize
+    public ulong VideoSize
     {
         get; set;
     }
