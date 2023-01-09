@@ -1,16 +1,15 @@
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 using WinFocus.Core.Helpers;
 using WinFocus.Core.Models;
 using WinFocus.Core.Services;
-using WinFocus.ViewModels;
-using WinUIEx;
+using WinFocus.Helpers;
 
 namespace WinFocus.Views;
 
@@ -18,27 +17,21 @@ public sealed partial class LiveWallpaperGalleryPage : Page
 {
     private LiveWallpaperPage? liveWallpaperPage = null;
     private IntPtr _windowHandle = IntPtr.Zero;
-    private int gridview_index = 0;
-    public void SetGridViewSource(ObservableCollection<VideoItem> source) => VideoGridView.ItemsSource = source;
 
-    public LiveWallpaperGalleryViewModel ViewModel
-    {
-        get;
-    }
+    private VideoItem videoItem;
+
+    public bool IsNotTSOn => !ts_apply.IsOn;
 
     public LiveWallpaperGalleryPage()
     {
-        Trace.WriteLine("LiveWallpaperGalleryPage() called.");
-        ViewModel = App.GetService<LiveWallpaperGalleryViewModel>();
-        ViewModel.SetCurrentPage(this);
-        this.InitializeComponent();
+        TraceHelper.TraceClass(this);
+        InitializeComponent();
         Init();
-        UpdateLayout();
     }
 
     private void Init()
     {
-        UpdateThumbnails();
+        //UpdateThumbnails();
         InitLiveWallpaperPage();
     }
 
@@ -49,7 +42,7 @@ public sealed partial class LiveWallpaperGalleryPage : Page
         addImage.Width = 130;
         addImage.Height = 130;
         addImage.Stretch = Microsoft.UI.Xaml.Media.Stretch.UniformToFill;
-        VideoGridView.Items.Add(addImage);
+        //VideoGridView.Items.Add(addImage);
     }
 
     private void InitLiveWallpaperPage()
@@ -64,24 +57,10 @@ public sealed partial class LiveWallpaperGalleryPage : Page
         liveWallpaperPage.Hide();
     }
 
-    private void GridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    public void SelectedVideoItemChanged(VideoItem v)
     {
-        var gv = sender as GridView;
-        if (gv != null)
-        {
-            gridview_index = gv.SelectedIndex;
-            UpdateVideoInfo(gridview_index);
-        }
-    }
-
-    private void UpdateVideoInfo(int index)
-    {
-        if (ViewModel != null && ViewModel.Source.Count > 0)
-        {
-            var videoItem = ViewModel.Source.ElementAt(index);
-            txtSize.Text = (videoItem.VideoSize / 1000).ToString();
-            txtResolution.Text = $"{videoItem.VideoWidth}x{videoItem.VideoHeight}";
-        }
+        videoItem = v;
+        UpdateInfo();
     }
 
     private void Btn_SetAsBg_Click(object sender, RoutedEventArgs e)
@@ -97,7 +76,7 @@ public sealed partial class LiveWallpaperGalleryPage : Page
         {
             foreach (var item in result)
             {
-                await ViewModel.AddVideoItemAsync(item.Path);
+                //await ViewModel.AddVideoItemAsync(item.Path);
             }
         }
     }
@@ -112,35 +91,28 @@ public sealed partial class LiveWallpaperGalleryPage : Page
     }
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
-        Trace.WriteLine("OnNavigatingTo()");
+        Trace.WriteLine($"OnNavigatedTo:{GetType().Name}");
         base.OnNavigatedTo(e);
-
-        VideoGridView.SelectedIndex = gridview_index = 0;
-        UpdateVideoInfo(gridview_index);
+        FrameVideoGridView.Navigate(typeof(VideoGridViewPage), this);
     }
 
     protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
     {
-        Trace.WriteLine("OnNavigatingFrom()");
+        Trace.WriteLine($"OnNavigatedFrom:{GetType().Name}");
         base.OnNavigatingFrom(e);
-
     }
 
     private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
     {
         var ts = sender as ToggleSwitch;
-        if (ts != null)
+        if (ts != null && liveWallpaperPage != null)
         {
             if (ts.IsOn)
             {
-                var index = VideoGridView.SelectedIndex;
-                if (liveWallpaperPage != null)
-                {
-                    liveWallpaperPage.Show();
-                    liveWallpaperPage.VideoFile = ViewModel.Source.ElementAt(index).VideoPath;
-                    liveWallpaperPage.Play();
-                    LiveWallpaperService.SetLiveWallpaper(_windowHandle);
-                }
+                liveWallpaperPage.Show();
+                liveWallpaperPage.videoFile = videoItem.VideoPath;
+                liveWallpaperPage.Play();
+                LiveWallpaperService.SetLiveWallpaper(_windowHandle);
             }
             else
             {
@@ -148,4 +120,16 @@ public sealed partial class LiveWallpaperGalleryPage : Page
             }
         }
     }
+
+    private void UpdateInfo()
+    {
+        txtResolution.Text = $"{videoItem.VideoWidth}x{videoItem.VideoHeight}";
+        txtSize.Text = Math.Round((videoItem.VideoSize * 1.0 / 10e6), 2).ToString();
+    }
+
+    //private void ts_apply_Tapped(object sender, TappedRoutedEventArgs e)
+    //{
+    //    var ts = sender as ToggleSwitch;
+    //    slider_volume.IsEnabled = ts.IsOn;
+    //}
 }

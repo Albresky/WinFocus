@@ -22,6 +22,8 @@
     <None Remove="Controls\DialogInfo.xaml" />
     <None Remove="Views\LiveWallpaperGalleryPage.xaml" />
     <None Remove="Views\LiveWallpaperPage.xaml" />
+    <None Remove="Views\MediaPlayerPage.xaml" />
+    <None Remove="Views\VideoGridViewPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +46,12 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Views\VideoGridViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\MediaPlayerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Views\LiveWallpaperGalleryPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

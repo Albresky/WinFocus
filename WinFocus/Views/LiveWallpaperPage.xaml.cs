@@ -1,17 +1,15 @@
 using System.Diagnostics;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using Windows.Graphics.Display;
 using Windows.Media.Core;
 using Windows.Storage;
-using WinUIEx;
 using static WinFocus.Core.Services.SystemService;
 
 namespace WinFocus.Views;
 
 public sealed partial class LiveWallpaperPage : Window
 {
-    public string VideoFile
+    public string? videoFile
     {
         set;
         private get;
@@ -24,26 +22,25 @@ public sealed partial class LiveWallpaperPage : Window
 
     public async void Play()
     {
-        var file = await StorageFile.GetFileFromPathAsync(VideoFile);
+        var file = await StorageFile.GetFileFromPathAsync(videoFile);
         var source = MediaSource.CreateFromStorageFile(file);
-        MediaPlayerElement.AutoPlay = true;
-        MediaPlayerElement.IsFullWindow = true;
-        MediaPlayerElement.MediaPlayer.IsLoopingEnabled = true;
-        MediaPlayerElement.Source = source;
-        MediaPlayerElement.MediaPlayer.AutoPlay = true;
+        mediaPlayerElement.AutoPlay = true;
+        mediaPlayerElement.IsFullWindow = true;
+        mediaPlayerElement.MediaPlayer.IsLoopingEnabled = true;
+        mediaPlayerElement.Source = source;
+        mediaPlayerElement.MediaPlayer.AutoPlay = true;
     }
 
     public void Stop()
     {
-        if (MediaPlayerElement != null )
+        var player = mediaPlayerElement?.MediaPlayer;
+        if (player != null)
         {
-            var player = MediaPlayerElement.MediaPlayer;
-            if (player != null)
-            {
-                player.Pause();
-                this.Hide();
-            }
+            player.Pause();
+            this.Hide();
         }
+        WallpaperService.BackupState();
+        WallpaperService.RestoreState();
     }
 
     public static ScreenSize GetSysScreenSize()
@@ -58,12 +55,12 @@ public sealed partial class LiveWallpaperPage : Window
 
     public void SetMute()
     {
-        MediaPlayerElement.MediaPlayer.IsMuted = true;
+        mediaPlayerElement.MediaPlayer.IsMuted = true;
     }
 
     public void SetVolume(double v)
     {
-        MediaPlayerElement.MediaPlayer.Volume = v;
+        mediaPlayerElement.MediaPlayer.Volume = v;
         Trace.WriteLine($"Current Volume of Video:{v}");
     }
 }

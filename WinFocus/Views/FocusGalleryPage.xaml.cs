@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using WinFocus.Core.Models;
 using WinFocus.ViewModels;
 
 namespace WinFocus.Views;
@@ -71,6 +72,7 @@ public sealed partial class FocusGalleryPage : Page
             txtDate.Text = ViewModel.Source.ElementAt(image_index).ImageDate.ToString();
             Trace.WriteLine("Current Image Index:{0}", image_index.ToString());
         }
-
     }
+
+
 }

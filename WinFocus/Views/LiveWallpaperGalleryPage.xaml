@@ -5,7 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:WinFocus.Core.Models"
-    NavigationCacheMode="Required"
     mc:Ignorable="d">
 
     <Grid
@@ -22,28 +21,7 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid>
-            <GridView
-                x:Name="VideoGridView"
-                AllowDrop="False"
-                CacheMode="BitmapCache"
-                CanDragItems="False"
-                CanReorderItems="False"
-                FlowDirection="LeftToRight"
-                IsItemClickEnabled="True"
-                ItemsSource="{x:Bind ViewModel.Source, Mode=OneTime}"
-                SelectedIndex="0"
-                SelectionChanged="GridView_SelectionChanged"
-                SelectionMode="Single">
-                <GridView.ItemTemplate>
-                    <DataTemplate x:DataType="models:VideoItem">
-                        <Image
-                            Width="190"
-                            Height="130"
-                            Source="{x:Bind ThumbnailPath}"
-                            Stretch="Fill" />
-                    </DataTemplate>
-                </GridView.ItemTemplate>
-            </GridView>
+            <Frame x:Name="FrameVideoGridView" Grid.Column="0" />
         </Grid>
         <Grid
             Grid.Column="1"
@@ -58,7 +36,7 @@
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                     <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="Size:" />
                     <TextBlock x:Name="txtSize" Style="{ThemeResource CaptionTextBlockStyle}" />
-                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="KB" />
+                    <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="MB" />
                 </StackPanel>
                 <StackPanel Margin="0,10,0,10" Orientation="Horizontal">
                     <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="Resolution:" />
@@ -68,17 +46,20 @@
                 <StackPanel Margin="0,10,0,10" Orientation="Vertical">
                     <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Volume" />
                     <Slider
+                        x:Name="slider_volume"
+                        IsEnabled="{x:Bind ts_apply.IsOn, Mode=OneWay}"
                         TickFrequency="1"
                         TickPlacement="Outside"
                         ValueChanged="Slider_ValueChanged" />
                 </StackPanel>
 
                 <ToggleSwitch
-                    Toggled="ToggleSwitch_Toggled"
+                    x:Name="ts_apply"
                     Header="Set As Wallpaper"
                     IsOn="False"
                     OffContent="Do Apply"
-                    OnContent="Working" />
+                    OnContent="Working"
+                    Toggled="ToggleSwitch_Toggled" />
 
                 <Button
                     HorizontalAlignment="Center"
