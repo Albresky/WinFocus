@@ -11,7 +11,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Margin="0,0,0,10">
             <Button
                 x:Name="Btn_GoBack"
                 HorizontalAlignment="Left"
@@ -24,6 +24,7 @@
             <MediaPlayerElement
                 x:Name="mediaPlayerElement"
                 AreTransportControlsEnabled="True"
+                CornerRadius="6"
                 Source="{x:Bind mSource}" />
         </Grid>
     </Grid>

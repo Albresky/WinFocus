@@ -35,16 +35,6 @@ public sealed partial class LiveWallpaperGalleryPage : Page
         InitLiveWallpaperPage();
     }
 
-    private void UpdateThumbnails()
-    {
-        var addImage = new Image();
-        addImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Add.png"));
-        addImage.Width = 130;
-        addImage.Height = 130;
-        addImage.Stretch = Microsoft.UI.Xaml.Media.Stretch.UniformToFill;
-        //VideoGridView.Items.Add(addImage);
-    }
-
     private void InitLiveWallpaperPage()
     {
         liveWallpaperPage = new();
@@ -69,24 +59,13 @@ public sealed partial class LiveWallpaperGalleryPage : Page
         Trace.WriteLine("Button Clicked.");
     }
 
-    private async void Btn_Add_Click(object sender, RoutedEventArgs e)
-    {
-        var result = await SystemService.GetFilesInFilePickerAsync(new string[] { ".mp4", ".mkv" });
-        if (result.Count > 0)
-        {
-            foreach (var item in result)
-            {
-                //await ViewModel.AddVideoItemAsync(item.Path);
-            }
-        }
-    }
 
     private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
     {
         var slider = sender as Slider;
         if (slider != null && liveWallpaperPage != null)
         {
-            liveWallpaperPage.SetVolume(slider.Value);
+            liveWallpaperPage.SetVolume(slider.Value/100);
         }
     }
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -126,10 +105,4 @@ public sealed partial class LiveWallpaperGalleryPage : Page
         txtResolution.Text = $"{videoItem.VideoWidth}x{videoItem.VideoHeight}";
         txtSize.Text = Math.Round((videoItem.VideoSize * 1.0 / 10e6), 2).ToString();
     }
-
-    //private void ts_apply_Tapped(object sender, TappedRoutedEventArgs e)
-    //{
-    //    var ts = sender as ToggleSwitch;
-    //    slider_volume.IsEnabled = ts.IsOn;
-    //}
 }

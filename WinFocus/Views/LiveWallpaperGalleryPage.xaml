@@ -21,7 +21,10 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid>
-            <Frame x:Name="FrameVideoGridView" Grid.Column="0" />
+            <Frame
+                x:Name="FrameVideoGridView"
+                Grid.Column="0"
+                Margin="0,0,10,0" />
         </Grid>
         <Grid
             Grid.Column="1"
@@ -48,9 +51,12 @@
                     <Slider
                         x:Name="slider_volume"
                         IsEnabled="{x:Bind ts_apply.IsOn, Mode=OneWay}"
+                        Maximum="100"
+                        Minimum="0"
                         TickFrequency="1"
                         TickPlacement="Outside"
-                        ValueChanged="Slider_ValueChanged" />
+                        ValueChanged="Slider_ValueChanged"
+                        Value="50" />
                 </StackPanel>
 
                 <ToggleSwitch
@@ -60,11 +66,6 @@
                     OffContent="Do Apply"
                     OnContent="Working"
                     Toggled="ToggleSwitch_Toggled" />
-
-                <Button
-                    HorizontalAlignment="Center"
-                    Click="Btn_Add_Click"
-                    Content="Add Video" />
             </StackPanel>
         </Grid>
     </Grid>

@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using Windows.Foundation.Metadata;
 using WinFocus.Core.Models;
+using WinFocus.Core.Services;
 using WinFocus.ViewModels;
 
 namespace WinFocus.Views;
@@ -13,7 +14,8 @@ public sealed partial class VideoGridViewPage : Page
     private int gridview_index = 0;
     private VideoItem _storeditem;
     private LiveWallpaperGalleryPage pageFrom;
-
+    private int prevCnt_VideoItems = 0;
+    private bool IsAddItemCreated;
 
     public LiveWallpaperGalleryViewModel ViewModel
     {
@@ -24,24 +26,43 @@ public sealed partial class VideoGridViewPage : Page
     {
         Trace.WriteLine(GetType().Name);
         InitializeComponent();
+        NavigationCacheMode = NavigationCacheMode.Enabled;
     }
 
-    private void GridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void VideoGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var gv = sender as GridView;
-        if (gv != null)
+        if (gv != null&&gv.SelectedIndex<gv.Items.Count-1)
         {
             gridview_index = gv.SelectedIndex;
             pageFrom.SelectedVideoItemChanged(ViewModel.Source.ElementAt(gridview_index));
         }
+        else { gv.SelectedIndex = gridview_index; }
     }
 
-    private void VideoGridView_ItemClick(object sender, ItemClickEventArgs e)
+    private async void VideoGridView_ItemClick(object sender, ItemClickEventArgs e)
     {
+        if (e.ClickedItem is VideoItem videoItem && videoItem.IsButton)
+        {
+            if (!processRing.IsActive)
+            {
+                StartProcessRing();
+            }
+            var newVideoItemsPath = await SystemService.GetFilesInFilePickerAsync(new string[] { ".mp4", ".mkv" });
+            if (newVideoItemsPath.Count > 0)
+            {
+                await ViewModel.AddVideoItemAsync(newVideoItemsPath);
+            }
+            else if (processRing.IsActive)
+            {
+                StopProcessRing();
+            }
+            return;
+        }
         if (VideoGridView.ContainerFromItem(e.ClickedItem) is GridViewItem container)
         {
             _storeditem = container.Content as VideoItem;
-            var animation =  VideoGridView.PrepareConnectedAnimation("ForwardConnectedAnimation", _storeditem, "connectedElement");
+            var animation = VideoGridView.PrepareConnectedAnimation("ForwardConnectedAnimation", _storeditem, "connectedElement");
         }
 
         Frame.Navigate(typeof(MediaPlayerPage), _storeditem, new SuppressNavigationTransitionInfo());
@@ -50,10 +71,6 @@ public sealed partial class VideoGridViewPage : Page
     private async void VideoGridView_Loaded(object sender, RoutedEventArgs e)
     {
         Trace.WriteLine("VideoGridView_Loaded()");
-        if (ViewModel?.Source?.Count >= 0)
-        {
-            StopProcessRing();
-        }
         if (_storeditem != null)
         {
             VideoGridView.ScrollIntoView(_storeditem, ScrollIntoViewAlignment.Default);
@@ -72,35 +89,27 @@ public sealed partial class VideoGridViewPage : Page
 
             VideoGridView.Focus(FocusState.Programmatic);
         }
+        var vm_cnt = ViewModel.Source.Count;
+        Trace.WriteLine($"vm_cnt:{vm_cnt}");
+        Trace.WriteLine($"prevCnt_VideoItems:{prevCnt_VideoItems}");
     }
 
-    private void VideoGridView_Loading(FrameworkElement sender, object args)
+    private void CreateVideoImportItem()
     {
-        //ConnectedAnimation animation = ConnectedAnimationService.GetForCurrentView().GetAnimation("BackConnectedAnimation");
-        //if (animation != null)
-        //{
-        //    // Setup the "back" configuration if the API is present. 
-        //    if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
-        //    {
-        //        animation.Configuration = new DirectConnectedAnimationConfiguration();
-        //    }
-        //    await VideoGridView.TryStartConnectedAnimationAsync(animation,)
-        //    await collection.TryStartConnectedAnimationAsync(animation, _storeditem, "connectedElement");
-        //}
+        var item = new VideoItem { ThumbnailPath = "D:\\Code\\C# Workspace\\WinFocus\\WinFocus\\Assets\\add.png", IsButton = true };
+        ViewModel.Source.Add(item);
     }
 
     public void StartProcessRing()
     {
-        Trace.WriteLine("StartProcessRing called.");
+        Trace.WriteLine("StartProcessRing()");
         processRing.IsActive = true;
-        Trace.WriteLine($"ProcessRing:{processRing.IsActive}");
     }
 
     public void StopProcessRing()
     {
-        Trace.WriteLine("StopProcessRing called.");
+        Trace.WriteLine("StopProcessRing()");
         processRing.IsActive = false;
-        Trace.WriteLine($"ProcessRing:{processRing.IsActive}");
     }
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
@@ -115,5 +124,25 @@ public sealed partial class VideoGridViewPage : Page
     {
         Trace.WriteLine($"OnNavigatedFrom:{GetType().Name}");
         base.OnNavigatingFrom(e);
+    }
+
+    private void connectedElement_Loaded(object sender, RoutedEventArgs e)
+    {
+        Trace.WriteLine("connectedElement_Loaded()");
+        if (0 == (--prevCnt_VideoItems))
+        {
+            if (!IsAddItemCreated)
+            {
+                IsAddItemCreated = true;
+                CreateVideoImportItem();
+            }
+            StopProcessRing();
+        }
+    }
+
+    private void connectedElement_Loading(FrameworkElement sender, object args)
+    {
+        Trace.WriteLine("connectedElement_Loading()");
+        prevCnt_VideoItems++;
     }
 }

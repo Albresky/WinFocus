@@ -9,11 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
     <Grid>
-        <ProgressRing
-            x:Name="processRing"
-            Width="80"
-            Height="80"
-            IsActive="True" />
         <GridView
             x:Name="VideoGridView"
             AllowDrop="False"
@@ -24,8 +19,9 @@
             IsItemClickEnabled="True"
             ItemClick="VideoGridView_ItemClick"
             ItemsSource="{x:Bind ViewModel.Source, Mode=OneTime}"
+            Loaded="VideoGridView_Loaded"
             SelectedIndex="0"
-            SelectionChanged="GridView_SelectionChanged"
+            SelectionChanged="VideoGridView_SelectionChanged"
             SelectionMode="Single">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="models:VideoItem">
@@ -33,13 +29,18 @@
                         x:Name="connectedElement"
                         Width="190"
                         Height="130"
-                        Loaded="VideoGridView_Loaded"
-                        Loading="VideoGridView_Loading"
+                        Loaded="connectedElement_Loaded"
+                        Loading="connectedElement_Loading"
                         Source="{x:Bind ThumbnailPath}"
                         Stretch="Fill" />
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
+        <ProgressRing
+            x:Name="processRing"
+            Width="80"
+            Height="80"
+            IsActive="True" />
     </Grid>
 
 </Page>

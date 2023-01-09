@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml.Controls;
+using Windows.Storage;
 using WinFocus.Contracts.Services;
 using WinFocus.Contracts.ViewModels;
 using WinFocus.Core.Contracts.Services;
@@ -49,9 +50,17 @@ public class LiveWallpaperGalleryViewModel : ObservableRecipient, INavigationAwa
         Trace.WriteLine($"OnNavigatedFrom:{GetType().Name}");
     }
 
-    public async Task AddVideoItemAsync(string path)
+    public async Task AddVideoItemAsync(IReadOnlyList<StorageFile> videoItemsPath)
     {
-        var videoItem= await _videoDataService.CreateVideoItemAsync(path);
-        Source.Add(videoItem);
+        var l=new List<VideoItem>(videoItemsPath.Count);
+        foreach(var path in videoItemsPath)
+        {
+            var item = await _videoDataService.CreateVideoItemAsync(path.Path);
+            l.Add(item);
+        }
+        foreach(var item in l)
+        {
+            Source.Insert(Source.Count - 1, item);
+        }
     }
 }

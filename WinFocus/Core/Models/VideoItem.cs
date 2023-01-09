@@ -40,4 +40,9 @@ public class VideoItem
     {
         get; set;
     }
+
+    public bool IsButton
+    {
+        get;set;
+    }
 }
