@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "WinFocus (Package)": {
+        "commandName": "MsixPackage"
+      },
+      "WinFocus (Unpackaged)": {
+        "commandName": "Project"
+      }
+    }
+}

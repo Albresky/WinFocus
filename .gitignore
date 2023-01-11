@@ -1,0 +1,6 @@
+.vs/*
+WinFocus/bin/*
+WinFocus/obj/*
+WinFocus.Core/bin/*
+WinFocus.Core/obj/*
+.editorconfig
