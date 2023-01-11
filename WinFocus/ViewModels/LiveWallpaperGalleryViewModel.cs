@@ -8,7 +8,6 @@ using WinFocus.Contracts.ViewModels;
 using WinFocus.Core.Contracts.Services;
 using WinFocus.Core.Models;
 using WinFocus.Helpers;
-using WinFocus.Views;
 
 namespace WinFocus.ViewModels;
 
@@ -52,13 +51,13 @@ public class LiveWallpaperGalleryViewModel : ObservableRecipient, INavigationAwa
 
     public async Task AddVideoItemAsync(IReadOnlyList<StorageFile> videoItemsPath)
     {
-        var l=new List<VideoItem>(videoItemsPath.Count);
-        foreach(var path in videoItemsPath)
+        var l = new List<VideoItem>(videoItemsPath.Count);
+        foreach (var path in videoItemsPath)
         {
             var item = await _videoDataService.CreateVideoItemAsync(path.Path);
             l.Add(item);
         }
-        foreach(var item in l)
+        foreach (var item in l)
         {
             Source.Insert(Source.Count - 1, item);
         }

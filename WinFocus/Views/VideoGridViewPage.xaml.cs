@@ -11,7 +11,7 @@ using WinFocus.ViewModels;
 namespace WinFocus.Views;
 public sealed partial class VideoGridViewPage : Page
 {
-    private int gridview_index = 0;
+    private int gridview_index = -1;
     private VideoItem _storeditem;
     private LiveWallpaperGalleryPage pageFrom;
     private int prevCnt_VideoItems = 0;
@@ -32,7 +32,7 @@ public sealed partial class VideoGridViewPage : Page
     private void VideoGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var gv = sender as GridView;
-        if (gv != null&&gv.SelectedIndex<gv.Items.Count-1)
+        if (gv != null && (gv.SelectedIndex < gv.Items.Count - 1 || gridview_index < 0))
         {
             gridview_index = gv.SelectedIndex;
             pageFrom.SelectedVideoItemChanged(ViewModel.Source.ElementAt(gridview_index));
@@ -83,15 +83,11 @@ public sealed partial class VideoGridViewPage : Page
                 {
                     animation.Configuration = new DirectConnectedAnimationConfiguration();
                 }
-
                 await VideoGridView.TryStartConnectedAnimationAsync(animation, _storeditem, "connectedElement");
             }
 
             VideoGridView.Focus(FocusState.Programmatic);
         }
-        var vm_cnt = ViewModel.Source.Count;
-        Trace.WriteLine($"vm_cnt:{vm_cnt}");
-        Trace.WriteLine($"prevCnt_VideoItems:{prevCnt_VideoItems}");
     }
 
     private void CreateVideoImportItem()

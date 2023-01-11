@@ -1,12 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
-
 using WinFocus.Activation;
 using WinFocus.Contracts.Services;
 using WinFocus.Core.Contracts.Services;
 using WinFocus.Core.Services;
-using WinFocus.Models;
+using WinFocus.Core.Utilities;
 using WinFocus.Services;
 using WinFocus.ViewModels;
 using WinFocus.Views;
@@ -35,6 +34,16 @@ public partial class App : Application
 
     public App()
     {
+        //Core.CoreEngine.Current.Logger.Info("程序启动");
+
+#if DEBUG
+        var isFirstRun = Core.CoreEngine.Current.AppSetting.GetAppFirstStart();
+        if (isFirstRun)
+        {
+            Core.CoreEngine.Current.Logger.Info($"程序安装或升级后第一次启动");
+            var re = ShortCut.FastCreate(true);
+        }
+#endif
         InitializeComponent();
 
         Host = Microsoft.Extensions.Hosting.Host.
@@ -48,7 +57,6 @@ public partial class App : Application
             // Other Activation Handlers
 
             // Services
-            services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
             services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
             services.AddTransient<INavigationViewService, NavigationViewService>();
 
@@ -72,7 +80,7 @@ public partial class App : Application
             services.AddTransient<ShellViewModel>();
 
             // Configuration
-            services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
+            //services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).
         Build();
 

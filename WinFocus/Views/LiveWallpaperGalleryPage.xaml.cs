@@ -3,8 +3,6 @@ using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 using WinFocus.Core.Helpers;
 using WinFocus.Core.Models;
@@ -27,6 +25,7 @@ public sealed partial class LiveWallpaperGalleryPage : Page
         TraceHelper.TraceClass(this);
         InitializeComponent();
         Init();
+        //NavigationCacheMode = NavigationCacheMode.Enabled;
     }
 
     private void Init()
@@ -65,7 +64,7 @@ public sealed partial class LiveWallpaperGalleryPage : Page
         var slider = sender as Slider;
         if (slider != null && liveWallpaperPage != null)
         {
-            liveWallpaperPage.SetVolume(slider.Value/100);
+            liveWallpaperPage.SetVolume(slider.Value / 100);
         }
     }
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -103,6 +102,6 @@ public sealed partial class LiveWallpaperGalleryPage : Page
     private void UpdateInfo()
     {
         txtResolution.Text = $"{videoItem.VideoWidth}x{videoItem.VideoHeight}";
-        txtSize.Text = Math.Round((videoItem.VideoSize * 1.0 / 10e6), 2).ToString();
+        txtSize.Text = Math.Round((videoItem.VideoSize * 1.0 / 1048576), 2).ToString();
     }
 }

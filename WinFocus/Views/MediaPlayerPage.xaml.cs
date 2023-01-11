@@ -21,6 +21,7 @@ public sealed partial class MediaPlayerPage : Page
     {
         TraceHelper.TraceClass(this);
         InitializeComponent();
+        NavigationCacheMode = NavigationCacheMode.Disabled;
         Btn_GoBack.Loaded += GoBackButton_Loaded;
     }
 

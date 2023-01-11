@@ -22,6 +22,8 @@
         </Grid.ColumnDefinitions>
         <Grid>
             <Frame
+                CacheMode="BitmapCache"
+                CacheSize="20"
                 x:Name="FrameVideoGridView"
                 Grid.Column="0"
                 Margin="0,0,10,0" />

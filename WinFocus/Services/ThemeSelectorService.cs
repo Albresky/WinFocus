@@ -7,20 +7,11 @@ namespace WinFocus.Services;
 
 public class ThemeSelectorService : IThemeSelectorService
 {
-    private const string SettingsKey = "AppBackgroundRequestedTheme";
-
     public ElementTheme Theme { get; set; } = ElementTheme.Default;
-
-    private readonly ILocalSettingsService _localSettingsService;
-
-    public ThemeSelectorService(ILocalSettingsService localSettingsService)
-    {
-        _localSettingsService = localSettingsService;
-    }
 
     public async Task InitializeAsync()
     {
-        Theme = await LoadThemeFromSettingsAsync();
+        Theme = LoadThemeFromSettings();
         await Task.CompletedTask;
     }
 
@@ -29,7 +20,7 @@ public class ThemeSelectorService : IThemeSelectorService
         Theme = theme;
 
         await SetRequestedThemeAsync();
-        await SaveThemeInSettingsAsync(Theme);
+        SaveThemeInSettings(Theme);
     }
 
     public async Task SetRequestedThemeAsync()
@@ -44,20 +35,18 @@ public class ThemeSelectorService : IThemeSelectorService
         await Task.CompletedTask;
     }
 
-    private async Task<ElementTheme> LoadThemeFromSettingsAsync()
+    private ElementTheme LoadThemeFromSettings()
     {
-        var themeName = await _localSettingsService.ReadSettingAsync<string>(SettingsKey);
-
+        var themeName = Core.CoreEngine.Current.AppSetting.GetAppTheme();
         if (Enum.TryParse(themeName, out ElementTheme cacheTheme))
         {
             return cacheTheme;
         }
-
         return ElementTheme.Default;
     }
 
-    private async Task SaveThemeInSettingsAsync(ElementTheme theme)
+    private void SaveThemeInSettings(ElementTheme theme)
     {
-        await _localSettingsService.SaveSettingAsync(SettingsKey, theme.ToString());
+       Core.CoreEngine.Current.AppSetting.SetAppTheme(theme.ToString());
     }
 }
