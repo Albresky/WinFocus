@@ -48,16 +48,16 @@ public sealed partial class SettingsPage : Page
             Core.CoreEngine.Current.AppSetting.SetAssetsPath(path, t);
         }
     }
-    private async void Button_FwDir_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private void Button_FwDir_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         SetFolderAndSave(0);
     }
-    private async void Button_LwDir_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private void Button_LwDir_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         SetFolderAndSave(1);
 
     }
-    private async void Button_BwDir_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private void Button_BwDir_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         SetFolderAndSave(2);
     }

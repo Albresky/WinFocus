@@ -60,7 +60,10 @@ public sealed partial class LiveWallpaperPage : Window
 
     public void SetVolume(double v)
     {
-        mediaPlayerElement.MediaPlayer.Volume = v;
+        if (mediaPlayerElement.MediaPlayer != null)
+        {
+            mediaPlayerElement.MediaPlayer.Volume = v;
+        }
         Trace.WriteLine($"Current Volume of Video:{v}");
     }
 }

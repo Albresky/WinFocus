@@ -5,6 +5,7 @@
     <AppxShowAllApps>False</AppxShowAllApps>
     <AppxBuildConfigurationSelection>x86|x64</AppxBuildConfigurationSelection>
     <PackageOptionalProjectsInIdeBuilds>False</PackageOptionalProjectsInIdeBuilds>
+    <DeployOptionalPackages>True</DeployOptionalPackages>
   </PropertyGroup>
   <ItemGroup>
     <Page Update="Views\BingWallpaperPage.xaml">

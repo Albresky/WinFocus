@@ -1,10 +1,11 @@
-﻿{
-    "profiles": {
-      "WinFocus (Package)": {
-        "commandName": "MsixPackage"
-      },
-      "WinFocus (Unpackaged)": {
-        "commandName": "Project"
-      }
+{
+  "profiles": {
+    "WinFocus (Package)": {
+      "commandName": "MsixPackage",
+      "nativeDebugging": false
+    },
+    "WinFocus (Unpackaged)": {
+      "commandName": "Project"
     }
+  }
 }

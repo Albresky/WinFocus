@@ -22,11 +22,11 @@
         </Grid.ColumnDefinitions>
         <Grid>
             <Frame
-                CacheMode="BitmapCache"
-                CacheSize="20"
                 x:Name="FrameVideoGridView"
                 Grid.Column="0"
-                Margin="0,0,10,0" />
+                Margin="0,0,10,0"
+                CacheMode="BitmapCache"
+                CacheSize="20" />
         </Grid>
         <Grid
             Grid.Column="1"
@@ -40,12 +40,18 @@
                 <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="LiveWallpaper Info" />
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                     <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="Size:" />
-                    <TextBlock x:Name="txtSize" Style="{ThemeResource CaptionTextBlockStyle}" />
+                    <TextBlock
+                        x:Name="txtSize"
+                        Style="{ThemeResource CaptionTextBlockStyle}"
+                        Text="0" />
                     <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="MB" />
                 </StackPanel>
                 <StackPanel Margin="0,10,0,10" Orientation="Horizontal">
                     <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="Resolution:" />
-                    <TextBlock x:Name="txtResolution" Style="{ThemeResource CaptionTextBlockStyle}" />
+                    <TextBlock
+                        x:Name="txtResolution"
+                        Style="{ThemeResource CaptionTextBlockStyle}"
+                        Text="0x0" />
                 </StackPanel>
 
                 <StackPanel Margin="0,10,0,10" Orientation="Vertical">

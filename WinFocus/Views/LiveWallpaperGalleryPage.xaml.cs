@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Navigation;
+using WinFocus.Core;
 using WinFocus.Core.Helpers;
 using WinFocus.Core.Models;
 using WinFocus.Core.Services;
@@ -13,12 +14,11 @@ namespace WinFocus.Views;
 
 public sealed partial class LiveWallpaperGalleryPage : Page
 {
-    private LiveWallpaperPage? liveWallpaperPage = null;
-    private IntPtr _windowHandle = IntPtr.Zero;
-
+    private static LiveWallpaperPage? liveWallpaperPage = null;
+    private static IntPtr _windowHandle = IntPtr.Zero;
     private VideoItem videoItem;
-
     public bool IsNotTSOn => !ts_apply.IsOn;
+
 
     public LiveWallpaperGalleryPage()
     {
@@ -36,14 +36,19 @@ public sealed partial class LiveWallpaperGalleryPage : Page
 
     private void InitLiveWallpaperPage()
     {
-        liveWallpaperPage = new();
-        _windowHandle = liveWallpaperPage.GetWindowHandle();
-        var screenSize = DisplayArea.Primary.OuterBounds;
-        liveWallpaperPage.SetWindowSize(screenSize.Width, screenSize.Height);
-        liveWallpaperPage.Activate();
-        liveWallpaperPage.CenterOnScreen();
-        LiveWallpaperWindow.RemoveTitleBar(liveWallpaperPage.GetWindowHandle());
-        liveWallpaperPage.Hide();
+        Trace.WriteLine("InitLiveWallpaperPage");
+        if (liveWallpaperPage == null)
+        {
+            Trace.WriteLine("new LiveWallpaperPage()");
+            liveWallpaperPage = new();
+            _windowHandle = liveWallpaperPage.GetWindowHandle();
+            var screenSize = DisplayArea.Primary.OuterBounds;
+            liveWallpaperPage.SetWindowSize(screenSize.Width, screenSize.Height);
+            liveWallpaperPage.Activate();
+            liveWallpaperPage.CenterOnScreen();
+            LiveWallpaperWindow.RemoveTitleBar(liveWallpaperPage.GetWindowHandle());
+            liveWallpaperPage.Hide();
+        }
     }
 
     public void SelectedVideoItemChanged(VideoItem v)
