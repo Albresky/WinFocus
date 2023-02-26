@@ -51,7 +51,7 @@ public class SettingsUtil
     private void InitFirstStart()
     {
         Trace.WriteLine("SettingsUtil.InitFirstStart()");
-        foreach(var pathType in Enum.GetNames(typeof(PathType)))
+        foreach (var pathType in Enum.GetNames(typeof(PathType)))
         {
             UpdateSettings(ContainerType.GlobalSettings,
                 pathType,
@@ -63,12 +63,12 @@ public class SettingsUtil
     /// 设置图片保存路径
     /// </summary>
     /// <param name="path"></param>
-    public void SetImagePath(string path, PathType pathType) => UpdateSettings(ContainerType.GlobalSettings, pathType.ToString(), path);
+    public void SetAssetsPath(string path, PathType pathType) => UpdateSettings(ContainerType.GlobalSettings, pathType.ToString(), path);
 
     /// <summary>
     /// 获取图片保存路径
     /// </summary>
-    public string GetImagePath(PathType pathType)
+    public string GetAssetsPath(PathType pathType)
     {
         var path = ReadSetting(ContainerType.GlobalSettings, pathType.ToString());
         if (string.IsNullOrEmpty(path))

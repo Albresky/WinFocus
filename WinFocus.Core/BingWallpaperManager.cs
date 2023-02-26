@@ -82,7 +82,7 @@ class BingWallpaperManager
     /// <returns>是否设置成功</returns>
     public bool SetWallpaper(bool forceFromWeb = false)
     {
-        var imageFolderPath = CoreEngine.Current.AppSetting.GetImagePath(PathType.BingWallpaperImagePath);
+        var imageFolderPath = CoreEngine.Current.AppSetting.GetAssetsPath(PathType.BingWallpaperImagePath);
         var imageFilePath = Path.Combine(imageFolderPath, $"bing{DateTime.Now:yyyyMMdd}.jpg");
         CoreEngine.Current.Logger.Info($"从本地或网络设置墙纸——强制从网络获取：{(forceFromWeb ? "是" : "否")}——文件名：bing{DateTime.Now.ToString("yyyyMMdd")}.jpg");
         if (forceFromWeb || !File.Exists(imageFilePath))//本地不存在文件
@@ -137,7 +137,7 @@ class BingWallpaperManager
     /// <returns></returns>
     public Bitmap GetWallpaperImage(bool forceFromWeb = false)
     {
-        var imageFolderPath = CoreEngine.Current.AppSetting.GetImagePath(PathType.BingWallpaperImagePath);
+        var imageFolderPath = CoreEngine.Current.AppSetting.GetAssetsPath(PathType.BingWallpaperImagePath);
         var imageFilePath = Path.Combine(imageFolderPath, $"bing{DateTime.Now:yyyyMMdd}.jpg");
         CoreEngine.Current.Logger.Info($"从本地或网络获取当天最新的图片Bitmap——强制从网络获取：{(forceFromWeb ? "是" : "否")}——文件名：bing{DateTime.Now.ToString("yyyyMMdd")}.jpg");
         if (forceFromWeb || !File.Exists(imageFilePath))//不存在文件
@@ -200,7 +200,7 @@ class BingWallpaperManager
     public bool DownloadWallpaperImage(DateTime date, out string result)
     {
 
-        var imageFolderPath = CoreEngine.Current.AppSetting.GetImagePath(PathType.BingWallpaperImagePath);
+        var imageFolderPath = CoreEngine.Current.AppSetting.GetAssetsPath(PathType.BingWallpaperImagePath);
         var imageFilePath = Path.Combine(imageFolderPath, $"bing{date.ToString("yyyyMMdd")}.jpg");
         CoreEngine.Current.Logger.Info($"下载壁纸——强制从网络获取——文件名：bing{DateTime.Now.ToString("yyyyMMdd")}.jpg");
         if (File.Exists(imageFilePath))//存在文件

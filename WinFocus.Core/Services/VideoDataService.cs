@@ -16,7 +16,8 @@ namespace WinFocus.Core.Services;
 public class VideoDataService : IVideoDataService
 {
     private List<VideoItem>? _allVideoDetail;
-    private static readonly string LOCAL_VIDEO_DIR = Core.CoreEngine.Current.AppSetting.GetImagePath(Models.SettingsTypes.PathType.LiveWallpaperVideoPath);
+    private static readonly string LOCAL_VIDEO_DIR = Core.CoreEngine.Current.AppSetting.GetAssetsPath(Models.SettingsTypes.PathType.LiveWallpaperVideoPath);
+    //private static readonly string LOCAL_VIDEO_DIR = "D:\\VideoCache";
     private static readonly string LOCAL_THUMBNAIL_CACHE_DIR = $"{LOCAL_VIDEO_DIR}\\thumbnails";
 
     public VideoDataService()

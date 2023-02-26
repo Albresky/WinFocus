@@ -1,0 +1,66 @@
+﻿<Page
+    x:Class="WinFocus.Views.BingWallpaperPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:WinFocus.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:WinFocus.Models"
+    xmlns:models1="using:WinFocus.Core.Models"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+    <ListView ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}">
+        <ListView.ItemTemplate>
+
+            <DataTemplate x:DataType="models1:ImageItem">
+                <Grid Margin="0,12,0,12" AutomationProperties.Name="{x:Bind ImageName}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="150" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        MaxHeight="100"
+                        Source="{x:Bind ImagePath}"
+                        Stretch="Fill" />
+
+                    <StackPanel Grid.Column="1" Margin="12,0,0,0">
+                        <TextBlock
+                            Margin="0,0,0,6"
+                            HorizontalAlignment="Left"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            LineHeight="20"
+                            Style="{ThemeResource BaseTextBlockStyle}"
+                            Text="{x:Bind ImageName}" />
+                        <TextBlock
+                            Width="350"
+                            FontFamily="Segoe UI"
+                            FontWeight="Normal"
+                            MaxLines="1"
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Text="{x:Bind ImageDescription}"
+                            TextTrimming="CharacterEllipsis" />
+                        <TextBlock
+                            Width="350"
+                            FontFamily="Segoe UI"
+                            FontWeight="Normal"
+                            MaxLines="1"
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Text="{x:Bind ImageAuthor}"
+                            TextTrimming="CharacterEllipsis" />
+                        <TextBlock
+                            Width="350"
+                            FontFamily="Segoe UI"
+                            FontWeight="Normal"
+                            MaxLines="1"
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Text="{x:Bind ImageDate}"
+                            TextTrimming="CharacterEllipsis" />
+
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+    </ListView>
+</Page>

@@ -15,7 +15,6 @@
             <TextBlock x:Uid="Settings_Personalization" Style="{ThemeResource SubtitleTextBlockStyle}" />
             <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
                 <TextBlock x:Uid="Settings_Theme" />
-
                 <StackPanel Margin="{StaticResource XSmallTopMargin}">
                     <RadioButton
                         x:Uid="Settings_Theme_Light"
@@ -50,11 +49,79 @@
                 </StackPanel>
             </StackPanel>
 
-            <TextBlock x:Uid="Settings_About" Style="{ThemeResource SubtitleTextBlockStyle}" />
+            <TextBlock x:Uid="Settings_Save" Style="{ThemeResource SubtitleTextBlockStyle}" />
+            <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
 
+                <StackPanel
+                    Margin="{StaticResource XSmallTopMargin}"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        x:Uid="Settings_FocusWallpaperDir"
+                        Width="120"
+                        VerticalAlignment="Center" />
+                    <TextBlock
+                        x:Name="txtFwDir"
+                        Width="350"
+                        VerticalAlignment="Center"
+                        FontSize="12"
+                        Text="{x:Bind ViewModel.FocusWallpaperDir, Mode=OneWay}" />
+                    <Button
+                        Margin="5,5,5,5"
+                        VerticalAlignment="Center"
+                        Click="Button_FwDir_Click">
+                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE17C;" />
+                    </Button>
+                </StackPanel>
+
+                <StackPanel
+                    Margin="{StaticResource XSmallTopMargin}"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        x:Uid="Settings_BingWallpaperDir"
+                        Width="120"
+                        VerticalAlignment="Center" />
+                    <TextBlock
+                        x:Name="txtLwDir"
+                        Width="350"
+                        VerticalAlignment="Center"
+                        FontSize="12"
+                        Text="{x:Bind ViewModel.BingWallpaperDir, Mode=OneWay}" />
+                    <Button
+                        Margin="5,5,5,5"
+                        VerticalAlignment="Center"
+                        Click="Button_LwDir_Click">
+                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE17C;" />
+                    </Button>
+                </StackPanel>
+
+                <StackPanel
+                    Margin="{StaticResource XSmallTopMargin}"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        x:Uid="Settings_LiveWallpaperDir"
+                        Width="120"
+                        VerticalAlignment="Center" />
+                    <TextBlock
+                        x:Name="txtBwDir"
+                        Width="350"
+                        VerticalAlignment="Center"
+                        FontSize="12"
+                        Text="{x:Bind ViewModel.LiveWallpaperDir, Mode=OneWay}" />
+                    <Button
+                        Margin="5,5,5,5"
+                        VerticalAlignment="Center"
+                        Click="Button_BwDir_Click">
+                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE17C;" />
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+
+            <TextBlock x:Uid="Settings_About" Style="{ThemeResource SubtitleTextBlockStyle}" />
             <StackPanel Margin="{StaticResource XSmallTopMargin}">
                 <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}" />
-
                 <TextBlock
                     x:Uid="Settings_AboutDescription"
                     Margin="{StaticResource XSmallTopMargin}"

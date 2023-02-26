@@ -7,6 +7,11 @@
     <PackageOptionalProjectsInIdeBuilds>False</PackageOptionalProjectsInIdeBuilds>
   </PropertyGroup>
   <ItemGroup>
+    <Page Update="Views\BingWallpaperPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Views\VideoGridViewPage.xaml">
       <SubType>Designer</SubType>
     </Page>

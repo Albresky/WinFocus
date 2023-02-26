@@ -12,7 +12,7 @@ namespace WinFocus.Core.Services;
 public class ImageDataService : IImageDataService
 {
     private List<ImageItem> _allImagesDetail;
-    private readonly string LOCAL_IMAGE_DIR = Core.CoreEngine.Current.AppSetting.GetImagePath(Models.SettingsTypes.PathType.FocusImagePath);
+    private readonly string LOCAL_IMAGE_DIR = Core.CoreEngine.Current.AppSetting.GetAssetsPath(Models.SettingsTypes.PathType.FocusImagePath);
 
     public ImageDataService()
     {

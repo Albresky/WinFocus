@@ -30,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controls\DialogInfo.xaml" />
+    <None Remove="Views\BingWallpaperPage.xaml" />
     <None Remove="Views\LiveWallpaperGalleryPage.xaml" />
     <None Remove="Views\LiveWallpaperPage.xaml" />
     <None Remove="Views\MediaPlayerPage.xaml" />
@@ -55,6 +56,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Views\BingWallpaperPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Views\VideoGridViewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -50,6 +50,11 @@
                         <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xEE4A;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem x:Uid="Shell_BingWallpaperGallery" helpers:NavigationHelper.NavigateTo="WinFocus.ViewModels.BingWallpaperGalleryViewModel">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE12B;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
             <NavigationView.HeaderTemplate>
                 <DataTemplate>
