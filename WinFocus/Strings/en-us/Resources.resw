@@ -177,4 +177,22 @@
   <data name="Shell_BingWallpaperGallery.Content" xml:space="preserve">
     <value>Bing Wallpaper</value>
   </data>
+  <data name="Settings_BingConfig" xml:space="preserve">
+    <value>Bing Cofig</value>
+  </data>
+  <data name="Settings_BingResolution.Text" xml:space="preserve">
+    <value>Bing Image Resolution</value>
+  </data>
+  <data name="Settings_BingResolution_1080P.Content" xml:space="preserve">
+    <value>1080P</value>
+  </data>
+  <data name="Settings_BingResolution_2160P.Content" xml:space="preserve">
+    <value>2160P</value>
+  </data>
+  <data name="Settings_BingResolution_1440P.Content" xml:space="preserve">
+    <value>1440P</value>
+  </data>
+  <data name="Settings_BingResolution_720P.Content" xml:space="preserve">
+    <value>720P</value>
+  </data>
 </root>

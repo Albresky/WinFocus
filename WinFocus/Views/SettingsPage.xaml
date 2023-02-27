@@ -49,6 +49,33 @@
                 </StackPanel>
             </StackPanel>
 
+            <TextBlock x:Uid="Settings_BingConfig" Style="{ThemeResource SubtitleTextBlockStyle}" />
+            <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
+                <TextBlock x:Uid="Settings_BingResolution" />
+                <StackPanel Margin="{StaticResource XSmallTopMargin}" Orientation="Horizontal">
+                    <RadioButton
+                        x:Uid="Settings_BingResolution_2160P"
+                        Click="RB_Resolution_Click"
+                        FontSize="15"
+                        GroupName="BingResolution" />
+                    <RadioButton
+                        x:Uid="Settings_BingResolution_1440P"
+                        Click="RB_Resolution_Click"
+                        FontSize="15"
+                        GroupName="BingResolution" />
+                    <RadioButton
+                        x:Uid="Settings_BingResolution_1080P"
+                        Click="RB_Resolution_Click"
+                        FontSize="15"
+                        GroupName="BingResolution" />
+                    <RadioButton
+                        x:Uid="Settings_BingResolution_720P"
+                        Click="RB_Resolution_Click"
+                        FontSize="15"
+                        GroupName="BingResolution" />
+                </StackPanel>
+            </StackPanel>
+
             <TextBlock x:Uid="Settings_Save" Style="{ThemeResource SubtitleTextBlockStyle}" />
             <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
 
@@ -118,6 +145,7 @@
                     </Button>
                 </StackPanel>
             </StackPanel>
+
 
             <TextBlock x:Uid="Settings_About" Style="{ThemeResource SubtitleTextBlockStyle}" />
             <StackPanel Margin="{StaticResource XSmallTopMargin}">

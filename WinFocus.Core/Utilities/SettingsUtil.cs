@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq.Expressions;
 using Windows.Storage;
+using WinFocus.Core.Models;
 using static WinFocus.Core.Models.SettingsTypes;
 
 namespace WinFocus.Core.Utilities;
@@ -12,11 +14,6 @@ namespace WinFocus.Core.Utilities;
 /// </summary>
 public class SettingsUtil
 {
-    private const int SIZE_2160P = 0;
-    private const int SIZE_1200P = 1;
-    private const int SIZE_1080P = 2;
-    private const int SIZE_720P = 3;
-
     private readonly List<ContainerType> containerTypes = new() { ContainerType.GlobalSettings, ContainerType.ImageInfo };
 
     public ApplicationDataContainer LocalSettings = ApplicationData.Current.LocalSettings;
@@ -145,35 +142,32 @@ public class SettingsUtil
     /// <summary>
     /// 获取壁纸尺寸类型
     /// </summary>
-    /// <param name="setting"></param>
-    /// <returns></returns>
-    private ImageSizeType GetSizeType(int setting)
+    /// <returns>string</returns>
+    public string GetBingSizeType()
     {
-        return setting switch
-        {
-            SIZE_2160P => ImageSizeType.S_2160P,
-            SIZE_1200P => ImageSizeType.S_1200P,
-            SIZE_1080P => ImageSizeType.S_1080P,
-            SIZE_720P => ImageSizeType.S_720P,
-            _ => ImageSizeType.S_1080P,
-        };
+        return SettingsTypes.ImageSizeTypeConverterEnumToStr((ImageSizeType)ReadSettingInt32(ContainerType.GlobalSettings, "BingSizeType"));
     }
+
 
     /// <summary>
     /// 设置壁纸尺寸类型
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    private int SetSizeType(ImageSizeType type)
+    public void SetBingSizeType(object type)
     {
-        return type switch
+        if (type is string strSize)
         {
-            ImageSizeType.S_2160P => SIZE_2160P,
-            ImageSizeType.S_1200P => SIZE_1200P,
-            ImageSizeType.S_1080P => SIZE_1080P,
-            ImageSizeType.S_720P => SIZE_720P,
-            _ => SIZE_1080P,
-        };
+            UpdateSettings(ContainerType.GlobalSettings, "BingSizeType", (int)SettingsTypes.ImageSizeTypeConverterStrToEnum(strSize));
+        }
+        else if (type is int intSize)
+        {
+            UpdateSettings(ContainerType.GlobalSettings, "BingSizeType", intSize);
+        }
+        else
+        {
+            throw new ArgumentException("ExceptionInUpdateSettingsBingSizeType");
+        }
     }
 
     /// <summary>
