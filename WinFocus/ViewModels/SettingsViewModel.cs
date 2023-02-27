@@ -22,6 +22,7 @@ public class SettingsViewModel : ObservableRecipient
     private string _focusWallpaperDir;
     private string _liveWallpaperDir;
     private string _bingWallpaperDir;
+    private int _bingSizeType;
 
     public ElementTheme ElementTheme
     {
@@ -53,6 +54,12 @@ public class SettingsViewModel : ObservableRecipient
         set => SetProperty(ref _bingWallpaperDir, value);
     }
 
+    public int BingSizeType
+    {
+        get => _bingSizeType;
+        set => SetProperty(ref _bingSizeType, value);
+    }
+
     public ICommand SwitchThemeCommand
     {
         get;
@@ -67,6 +74,7 @@ public class SettingsViewModel : ObservableRecipient
         _focusWallpaperDir = Core.CoreEngine.Current.AppSetting.GetAssetsPath(SettingsTypes.PathType.FocusImagePath);
         _liveWallpaperDir = Core.CoreEngine.Current.AppSetting.GetAssetsPath(SettingsTypes.PathType.LiveWallpaperVideoPath);
         _bingWallpaperDir = Core.CoreEngine.Current.AppSetting.GetAssetsPath(SettingsTypes.PathType.BingWallpaperImagePath);
+        _bingSizeType = (int)Core.CoreEngine.Current.AppSetting.GetBingSizeType(true);
 
         SwitchThemeCommand = new RelayCommand<ElementTheme>(
             async (param) =>
@@ -77,6 +85,8 @@ public class SettingsViewModel : ObservableRecipient
                     await _themeSelectorService.SetThemeAsync(param);
                 }
             });
+
+
     }
 
     private static string GetVersionDescription()

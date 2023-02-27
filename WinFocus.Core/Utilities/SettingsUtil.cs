@@ -143,9 +143,17 @@ public class SettingsUtil
     /// 获取壁纸尺寸类型
     /// </summary>
     /// <returns>string</returns>
-    public string GetBingSizeType()
+    public object GetBingSizeType(bool isInt = false)
     {
-        return SettingsTypes.ImageSizeTypeConverterEnumToStr((ImageSizeType)ReadSettingInt32(ContainerType.GlobalSettings, "BingSizeType"));
+        var type = ReadSettingInt32(ContainerType.GlobalSettings, "BingSizeType");
+        if (isInt)
+        {
+            return type;
+        }
+        else
+        {
+            return SettingsTypes.ImageSizeTypeConverterEnumToStr((ImageSizeType)type);
+        }
     }
 
 

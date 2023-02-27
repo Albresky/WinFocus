@@ -53,26 +53,29 @@
             <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
                 <TextBlock x:Uid="Settings_BingResolution" />
                 <StackPanel Margin="{StaticResource XSmallTopMargin}" Orientation="Horizontal">
-                    <RadioButton
-                        x:Uid="Settings_BingResolution_2160P"
-                        Click="RB_Resolution_Click"
-                        FontSize="15"
-                        GroupName="BingResolution" />
-                    <RadioButton
-                        x:Uid="Settings_BingResolution_1440P"
-                        Click="RB_Resolution_Click"
-                        FontSize="15"
-                        GroupName="BingResolution" />
-                    <RadioButton
-                        x:Uid="Settings_BingResolution_1080P"
-                        Click="RB_Resolution_Click"
-                        FontSize="15"
-                        GroupName="BingResolution" />
-                    <RadioButton
-                        x:Uid="Settings_BingResolution_720P"
-                        Click="RB_Resolution_Click"
-                        FontSize="15"
-                        GroupName="BingResolution" />
+                    <RadioButtons x:Name="rbs_resolution">
+                        <RadioButton
+                            x:Uid="Settings_BingResolution_2160P"
+                            Click="RB_Resolution_Click"
+                            FontSize="15"
+                            GroupName="BingResolution" />
+                        <RadioButton
+                            x:Uid="Settings_BingResolution_1440P"
+                            Click="RB_Resolution_Click"
+                            FontSize="15"
+                            GroupName="BingResolution" />
+                        <RadioButton
+                            x:Uid="Settings_BingResolution_1080P"
+                            Click="RB_Resolution_Click"
+                            FontSize="15"
+                            GroupName="BingResolution" />
+                        <RadioButton
+                            x:Uid="Settings_BingResolution_720P"
+                            Click="RB_Resolution_Click"
+                            FontSize="15"
+                            GroupName="BingResolution" />
+                    </RadioButtons>
+
                 </StackPanel>
             </StackPanel>
 

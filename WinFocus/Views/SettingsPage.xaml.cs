@@ -17,6 +17,8 @@ public sealed partial class SettingsPage : Page
     {
         ViewModel = App.GetService<SettingsViewModel>();
         InitializeComponent();
+
+        rbs_resolution.SelectedIndex = ViewModel.BingSizeType;
     }
 
 
