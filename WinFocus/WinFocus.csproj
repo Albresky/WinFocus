@@ -15,7 +15,7 @@
     <EnableMsixTooling>true</EnableMsixTooling>
     <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <PackageCertificateThumbprint>07DA67BC14A45B1FBB0FDD2DB88FD0DB8618586F</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>667C15B09F5993F52470A485E8449AC92581B0CC</PackageCertificateThumbprint>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
@@ -26,7 +26,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Remove="Assets\add.png" />
+    <Content Remove="Assets\StoreLogo.scale-100.png" />
+    <Content Remove="Assets\StoreLogo.scale-125.png" />
+    <Content Remove="Assets\StoreLogo.scale-150.png" />
+    <Content Remove="Assets\StoreLogo.scale-200.png" />
+    <Content Remove="Assets\StoreLogo.scale-400.png" />
     <Content Remove="Assets\Video\Video.mp4" />
+    <Content Remove="Assets\WindowIcon_256x256.png" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controls\DialogInfo.xaml" />

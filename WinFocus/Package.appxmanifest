@@ -12,12 +12,12 @@
   <Identity
     Name="4974BFE7-8BEF-4573-8304-63509F64E709"
     Publisher="CN=Albresky"
-    Version="1.0.0.0" />
+    Version="0.0.1.0" />
 
   <Properties>
     <DisplayName>WinFocus</DisplayName>
     <PublisherDisplayName>Albresky</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
+    <Logo>Assets\WindowIcon.png</Logo>
   </Properties>
 
   <Dependencies>
@@ -38,9 +38,16 @@
         Description="ms-resource:AppDescription"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
-        Square44x44Logo="Assets\Square44x44Logo.png">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        Square44x44Logo="Assets\WindowIcon.png">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"  ShortName="WinFocus" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo"/>
+            <uap:ShowOn Tile="wide310x150Logo"/>
+            <uap:ShowOn Tile="square310x310Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile >
+        <uap:SplashScreen Image="Assets\WindowIcon.png"/>
+        <uap:LockScreen BadgeLogo="Assets\WindowIcon.png" Notification="badgeAndTileText"/>
       </uap:VisualElements>
       <Extensions>
           <desktop:Extension Category="windows.toastNotificationActivation">
