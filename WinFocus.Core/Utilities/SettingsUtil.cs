@@ -214,7 +214,12 @@ public class SettingsUtil
     {
         try
         {
-            var result = LocalSettings.Containers[containerType.ToString()].Values[key].ToString() ?? def;
+            var container = LocalSettings.Containers[containerType.ToString()];
+            if (container == null || !container.Values.ContainsKey(key) || container.Values[key] == null)
+            {
+                return def;
+            }
+            var result = container.Values[key].ToString() ?? def;
             return result;
         }
         catch (NullReferenceException)
@@ -222,6 +227,7 @@ public class SettingsUtil
             return def;
         }
     }
+
 
     /// <summary>
     /// 读取单项配置信息（int类型）
