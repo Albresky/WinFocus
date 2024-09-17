@@ -1,6 +1,12 @@
 # WinFocus
 Windows 聚焦壁纸 | Windows Focus Wallpaper
 
+
+# Demo Preview | 演示预览
+
+  <video src="images/demo.mp4" width="100%" controls="controls"></video>
+  
+
 # 功能
  - 支持Windows锁屏出现的历史壁纸的预览与缓存
    - （系统会定期清理历史聚焦壁纸）
