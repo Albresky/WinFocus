@@ -114,7 +114,7 @@
                   Width="120"
                   VerticalAlignment="Center" />
                         <TextBlock
-                  x:Name="txtLwDir"
+                  x:Name="txtBwDir"
                   Width="350"
                   VerticalAlignment="Center"
                   FontSize="12"
@@ -136,7 +136,7 @@
                   Width="120"
                   VerticalAlignment="Center" />
                         <TextBlock
-                  x:Name="txtBwDir"
+                  x:Name="txtLwDir"
                   Width="350"
                   VerticalAlignment="Center"
                   FontSize="12"
