@@ -151,7 +151,7 @@
     <value>About this application</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>TODO: 1.Settings Store 2.Bing Wallpaper.</value>
+    <value>TODO: 1.Bing Wallpaper. 2.Fix Relese build.</value>
   </data>
   <data name="SettingsPage_GithubLink.Content" xml:space="preserve">
     <value>Github</value>
