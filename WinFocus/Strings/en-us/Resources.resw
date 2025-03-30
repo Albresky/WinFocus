@@ -151,7 +151,7 @@
     <value>About this application</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>TODO: 1.Settings Store 2.Bing Wallpaper. 3.Video Wallpaper</value>
+    <value>TODO: 1.Settings Store 2.Bing Wallpaper.</value>
   </data>
   <data name="SettingsPage_GithubLink.Content" xml:space="preserve">
     <value>Github</value>
@@ -172,7 +172,7 @@
     <value>Live Wallpaper</value>
   </data>
   <data name="Settings_Save.Text" xml:space="preserve">
-    <value>Cache Path</value>
+    <value>Cache Directories</value>
   </data>
   <data name="Shell_BingWallpaperGallery.Content" xml:space="preserve">
     <value>Bing Wallpaper</value>
