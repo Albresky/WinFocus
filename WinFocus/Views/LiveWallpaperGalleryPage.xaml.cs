@@ -37,7 +37,7 @@ public sealed partial class LiveWallpaperGalleryPage : Page
     private void InitLiveWallpaperPage()
     {
         Trace.WriteLine("InitLiveWallpaperPage");
-        if (liveWallpaperPage == null)
+        if (liveWallpaperPage == null || liveWallpaperPage.Title == "")
         {
             Trace.WriteLine("new LiveWallpaperPage()");
             liveWallpaperPage = new();
@@ -92,14 +92,27 @@ public sealed partial class LiveWallpaperGalleryPage : Page
         {
             if (ts.IsOn)
             {
+                if(liveWallpaperPage.Title == "")
+                {
+                    InitLiveWallpaperPage();
+                }
+                liveWallpaperPage.Restore();
                 liveWallpaperPage.Show();
                 liveWallpaperPage.videoFile = videoItem.VideoPath;
                 liveWallpaperPage.Play();
+
+                // check if _windowHandle is valid
+                IntPtr new_windowHandle = liveWallpaperPage.GetWindowHandle();
+                if (_windowHandle != new_windowHandle)
+                {
+                    _windowHandle = new_windowHandle;
+                }
                 LiveWallpaperService.SetLiveWallpaper(_windowHandle);
             }
             else
             {
                 liveWallpaperPage.Stop();
+                LiveWallpaperService.StopLiveWallpaper();
             }
         }
     }
