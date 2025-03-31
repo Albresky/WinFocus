@@ -12,15 +12,15 @@ namespace WinFocus.Views;
 public sealed partial class VideoGridViewPage : Page
 {
     private int gridview_index = -1;
-    private VideoItem _storeditem;
-    private LiveWallpaperGalleryPage pageFrom;
+    private VideoItem _storeditem = null!;
+    private LiveWallpaperGalleryPage pageFrom = null!;
     private int prevCnt_VideoItems = 0;
     private bool IsAddItemCreated;
 
     public LiveWallpaperGalleryViewModel ViewModel
     {
         get; set;
-    }
+    } = null!;
 
     public VideoGridViewPage()
     {
@@ -61,7 +61,8 @@ public sealed partial class VideoGridViewPage : Page
         }
         if (VideoGridView.ContainerFromItem(e.ClickedItem) is GridViewItem container)
         {
-            _storeditem = container.Content as VideoItem;
+            if (container is null) return;
+            _storeditem = container.Content as VideoItem ?? throw new InvalidOperationException("Container content is not a VideoItem.");
             var animation = VideoGridView.PrepareConnectedAnimation("ForwardConnectedAnimation", _storeditem, "connectedElement");
         }
 
@@ -92,7 +93,9 @@ public sealed partial class VideoGridViewPage : Page
 
     private void CreateVideoImportItem()
     {
-        var item = new VideoItem { ThumbnailPath = "D:\\Code\\C# Workspace\\WinFocus\\WinFocus\\Assets\\add.png", IsButton = true };
+        String addBtnAssPath = Path.Combine(AppContext.BaseDirectory, "Assets\\add.png");
+        Trace.WriteLine($"addBtnAssPath: {addBtnAssPath}");
+        var item = new VideoItem { ThumbnailPath = addBtnAssPath, IsButton = true };
         ViewModel.Source.Add(item);
     }
 

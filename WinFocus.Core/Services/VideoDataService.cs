@@ -16,15 +16,29 @@ namespace WinFocus.Core.Services;
 public class VideoDataService : IVideoDataService
 {
     private List<VideoItem>? _allVideoDetail;
-    private static readonly string LOCAL_VIDEO_DIR = Core.CoreEngine.Current.AppSetting.GetAssetsPath(Models.SettingsTypes.PathType.LiveWallpaperVideoPath);
-    //private static readonly string LOCAL_VIDEO_DIR = "D:\\VideoCache";
-    private static readonly string LOCAL_THUMBNAIL_CACHE_DIR = $"{LOCAL_VIDEO_DIR}\\thumbnails";
+    private readonly String AssetsVideoPath = Path.Combine(AppContext.BaseDirectory, "Assets\\Video");
+
+    private string LOCAL_VIDEO_DIR()
+    {
+        return Core.CoreEngine.Current.AppSetting.GetAssetsPath(Models.SettingsTypes.PathType.LiveWallpaperVideoPath); 
+    }
+    private string LOCAL_THUMBNAIL_CACHE_DIR()
+    {
+        return $"{LOCAL_VIDEO_DIR()}\\thumbnails";
+    }
 
     public VideoDataService()
     {
-        if (!FileService.OpenFolder(LOCAL_THUMBNAIL_CACHE_DIR) || !FileService.OpenFolder(LOCAL_VIDEO_DIR))
+        Trace.WriteLine("LOCAL_VIDEO_DIR: " + LOCAL_VIDEO_DIR());
+        if (!Directory.Exists(LOCAL_VIDEO_DIR()))
         {
-            Trace.WriteLine("Failed to open video directory");
+            Trace.WriteLine("[VideoDataService] " + LOCAL_VIDEO_DIR() + " does not exist, creating it.");
+            Directory.CreateDirectory(LOCAL_VIDEO_DIR());
+        }
+        if (!Directory.Exists(LOCAL_THUMBNAIL_CACHE_DIR()))
+        {
+            Trace.WriteLine("[VideoDataService] " + LOCAL_THUMBNAIL_CACHE_DIR() + " does not exist, creating it.");
+            Directory.CreateDirectory(LOCAL_THUMBNAIL_CACHE_DIR());
         }
     }
 
@@ -47,14 +61,25 @@ public class VideoDataService : IVideoDataService
         /// Save thumbnail of the video to a file
         /// </summary>
         var imgName = await SaveThumbnailAsync(imageStream, videoItem.VideoWidth, videoItem.VideoHeight, videoFile.Name);
-        videoItem.ThumbnailPath = $"{LOCAL_THUMBNAIL_CACHE_DIR}\\{imgName}";
+        videoItem.ThumbnailPath = $"{LOCAL_THUMBNAIL_CACHE_DIR()}\\{imgName}";
         return videoItem;
     }
 
     private async Task<IEnumerable<VideoItem>> AllVideo()
     {
         var videos = new List<VideoItem>();
-        var videoFullPath = Directory.GetFiles(LOCAL_VIDEO_DIR);
+        var videoFullPath = Directory.GetFiles(LOCAL_VIDEO_DIR());
+        Trace.WriteLine($"videoFullPath: {videoFullPath}");
+        if(videoFullPath.Length == 0)
+        {
+            Trace.TraceWarning("[W]No video found in the directory.");
+            videoFullPath = Directory.GetFiles(AssetsVideoPath);
+        }
+        if(videoFullPath.Length == 0)
+        {
+            Trace.TraceError("No video found in the assets directory.");
+            return videos;
+        }
         foreach (var path in videoFullPath)
         {
             var item = await CreateVideoItemAsync(path);
@@ -66,13 +91,14 @@ public class VideoDataService : IVideoDataService
     public static async Task<string> SaveThumbnailAsync(ImageStream imageStream, int width, int height, string fileName)
     {
         var imgName = $"thumbnail_{fileName.Split('.')[0]}.jpg";
-        if (File.Exists($"{LOCAL_THUMBNAIL_CACHE_DIR}\\{imgName}"))
+        var thumbnailCacheDir = new VideoDataService().LOCAL_THUMBNAIL_CACHE_DIR();
+        if (File.Exists($"{thumbnailCacheDir}\\{imgName}"))
         {
             return imgName;
         }
         var writableBitmap = new WriteableBitmap(width, height);
 
-        var T_SaveFolder = CreateFileAsync(imgName, LOCAL_THUMBNAIL_CACHE_DIR);
+        var T_SaveFolder = CreateFileAsync(imgName, thumbnailCacheDir);
         var T_ReadStream = ReadStreamAsync(writableBitmap, imageStream, width, height);
 
         var SaveTarget = await T_SaveFolder;

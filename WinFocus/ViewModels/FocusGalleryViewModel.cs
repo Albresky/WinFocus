@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -43,7 +44,10 @@ public class FocusGalleryViewModel : ObservableRecipient, INavigationAware
 
     public async void OnNavigatedTo(object parameter)
     {
-        Source.Clear();
+        if(Source.Count > 0)
+        {
+            return;
+        }
 
         // TODO: Replace with real data.
         var data = await _imageDataService.GetImageGridDataAsync();

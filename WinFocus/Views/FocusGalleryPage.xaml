@@ -5,7 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:WinFocus.Core.Models"
-    xmlns:models1="using:WinFocus.Models"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
@@ -35,55 +34,57 @@
             <!--  Set As Wallpaper Button  -->
             <Grid Grid.Column="1" Margin="10,0,0,0">
                 <!--  Control Panel  -->
-                <StackPanel
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Orientation="Vertical">
-                    <RadioButtons
-                        x:Name="WallpaperStyleRBs"
-                        Header="Styles"
-                        MaxColumns="1"
-                        SelectedIndex="0"
-                        SelectionChanged="RadioButtons_SelectionChanged">
-                        <x:String>Fill</x:String>
-                        <x:String>Fit</x:String>
-                        <x:String>Stretch</x:String>
-                        <x:String>Tile</x:String>
-                        <x:String>Center</x:String>
-                        <x:String>Stretch</x:String>
-                    </RadioButtons>
-                    <Button
-                        Margin="0,10,0,0"
+                <ScrollViewer>
+                    <StackPanel
                         HorizontalAlignment="Center"
-                        Click="Button_SetAsWallpaper_Click"
-                        Content="Set As Wallpaper" />
-                    <!--  Wallpaper Info  -->
-                    <StackPanel Margin="0,20,0,0" Orientation="Vertical">
-                        <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Wallpaper Info" />
-                        <StackPanel Margin="0,5,0,5" Orientation="Horizontal">
-                            <TextBlock
-                                FontWeight="Bold"
-                                Style="{ThemeResource CaptionTextBlockStyle}"
-                                Text="Resolution:" />
-                            <TextBlock x:Name="txtResolution" Style="{ThemeResource CaptionTextBlockStyle}" />
-                        </StackPanel>
+                        VerticalAlignment="Top"
+                        Orientation="Vertical">
+                        <RadioButtons
+                            x:Name="WallpaperStyleRBs"
+                            Header="Styles"
+                            MaxColumns="1"
+                            SelectedIndex="0"
+                            SelectionChanged="RadioButtons_SelectionChanged">
+                            <x:String>Fill</x:String>
+                            <x:String>Fit</x:String>
+                            <x:String>Stretch</x:String>
+                            <x:String>Tile</x:String>
+                            <x:String>Center</x:String>
+                            <x:String>Stretch</x:String>
+                        </RadioButtons>
+                        <Button
+                            Margin="0,10,0,0"
+                            HorizontalAlignment="Center"
+                            Click="Button_SetAsWallpaper_Click"
+                            Content="Set As Wallpaper" />
+                        <!--  Wallpaper Info  -->
+                        <StackPanel Margin="0,20,0,0" Orientation="Vertical">
+                            <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Wallpaper Info" />
+                            <StackPanel Margin="0,5,0,5" Orientation="Horizontal">
+                                <TextBlock
+                                    FontWeight="Bold"
+                                    Style="{ThemeResource CaptionTextBlockStyle}"
+                                    Text="Resolution:" />
+                                <TextBlock x:Name="txtResolution" Style="{ThemeResource CaptionTextBlockStyle}" />
+                            </StackPanel>
 
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock
-                                FontWeight="Bold"
-                                Style="{ThemeResource CaptionTextBlockStyle}"
-                                Text="Size:" />
-                            <TextBlock x:Name="txtSize" Style="{ThemeResource CaptionTextBlockStyle}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock
-                                FontWeight="Bold"
-                                Style="{ThemeResource CaptionTextBlockStyle}"
-                                Text="Date:" />
-                            <TextBlock x:Name="txtDate" Style="{ThemeResource CaptionTextBlockStyle}" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                                    FontWeight="Bold"
+                                    Style="{ThemeResource CaptionTextBlockStyle}"
+                                    Text="Size:" />
+                                <TextBlock x:Name="txtSize" Style="{ThemeResource CaptionTextBlockStyle}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                                    FontWeight="Bold"
+                                    Style="{ThemeResource CaptionTextBlockStyle}"
+                                    Text="Date:" />
+                                <TextBlock x:Name="txtDate" Style="{ThemeResource CaptionTextBlockStyle}" />
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
-                </StackPanel>
+                </ScrollViewer>
             </Grid>
 
         </Grid>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -16,6 +17,15 @@ public class ImageDataService : IImageDataService
 
     public ImageDataService()
     {
+        if (!Directory.Exists(LOCAL_IMAGE_DIR))
+        {
+            Trace.WriteLine("[ImageDataService] " + LOCAL_IMAGE_DIR + " does not exist, creating it.");
+            Directory.CreateDirectory(LOCAL_IMAGE_DIR);
+        }
+        else
+        {
+            Trace.WriteLine("[ImageDataService] " + LOCAL_IMAGE_DIR + " already exists.");
+        }
     }
 
     private IEnumerable<ImageItem> AllImages()

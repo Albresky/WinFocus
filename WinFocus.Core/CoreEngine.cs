@@ -1,6 +1,8 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Reflection.Metadata;
+using Windows.Storage;
 using WinFocus.Core.Utilities;
 
 namespace WinFocus.Core;
@@ -42,6 +44,8 @@ public class CoreEngine
     /// 程序根目录
     /// </summary>
     public string AppRootDirection { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
+
+    public string AppDataDicrection { get; set; } = ApplicationData.Current.LocalFolder.Path;
 
     /// <summary>
     /// 日志管理器

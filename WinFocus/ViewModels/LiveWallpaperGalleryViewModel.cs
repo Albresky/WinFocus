@@ -36,7 +36,8 @@ public class LiveWallpaperGalleryViewModel : ObservableRecipient, INavigationAwa
     public async void OnNavigatedTo(object parameter)
     {
         Trace.WriteLine($"OnNavigatedTo:{GetType().Name}");
-        Source.Clear();
+        if (Source.Count > 0) return;
+
         var data = await _videoDataService.GetVideoDataAsync();
         foreach (var item in data)
         {

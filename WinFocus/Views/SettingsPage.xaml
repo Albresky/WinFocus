@@ -14,35 +14,35 @@
         <ScrollViewer>
             <StackPanel x:Name="ContentArea">
                 <TextBlock x:Uid="Settings_Personalization" Style="{ThemeResource SubtitleTextBlockStyle}" />
-                <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
-                    <TextBlock x:Uid="Settings_Theme" />
+                <StackPanel>
+                    <TextBlock x:Uid="Settings_Theme" FontWeight="Bold" />
                     <StackPanel Margin="{StaticResource XSmallTopMargin}">
                         <RadioButton
-                  x:Uid="Settings_Theme_Light"
-                  Command="{x:Bind ViewModel.SwitchThemeCommand}"
-                  FontSize="15"
-                  GroupName="AppTheme"
-                  IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}">
+                            x:Uid="Settings_Theme_Light"
+                            Command="{x:Bind ViewModel.SwitchThemeCommand}"
+                            FontSize="15"
+                            GroupName="AppTheme"
+                            IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}">
                             <RadioButton.CommandParameter>
                                 <xaml:ElementTheme>Light</xaml:ElementTheme>
                             </RadioButton.CommandParameter>
                         </RadioButton>
                         <RadioButton
-                  x:Uid="Settings_Theme_Dark"
-                  Command="{x:Bind ViewModel.SwitchThemeCommand}"
-                  FontSize="15"
-                  GroupName="AppTheme"
-                  IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}">
+                            x:Uid="Settings_Theme_Dark"
+                            Command="{x:Bind ViewModel.SwitchThemeCommand}"
+                            FontSize="15"
+                            GroupName="AppTheme"
+                            IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}">
                             <RadioButton.CommandParameter>
                                 <xaml:ElementTheme>Dark</xaml:ElementTheme>
                             </RadioButton.CommandParameter>
                         </RadioButton>
                         <RadioButton
-                  x:Uid="Settings_Theme_Default"
-                  Command="{x:Bind ViewModel.SwitchThemeCommand}"
-                  FontSize="15"
-                  GroupName="AppTheme"
-                  IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Default, Mode=OneWay}">
+                            x:Uid="Settings_Theme_Default"
+                            Command="{x:Bind ViewModel.SwitchThemeCommand}"
+                            FontSize="15"
+                            GroupName="AppTheme"
+                            IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Default, Mode=OneWay}">
                             <RadioButton.CommandParameter>
                                 <xaml:ElementTheme>Default</xaml:ElementTheme>
                             </RadioButton.CommandParameter>
@@ -50,115 +50,172 @@
                     </StackPanel>
                 </StackPanel>
 
-                <TextBlock x:Uid="Settings_BingConfig" Style="{ThemeResource SubtitleTextBlockStyle}" />
-                <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
-                    <TextBlock x:Uid="Settings_BingResolution" />
+                <TextBlock
+                    x:Uid="Settings_BingConfig"
+                    Margin="{StaticResource SmallTopMargin}"
+                    Style="{ThemeResource SubtitleTextBlockStyle}" />
+                <StackPanel>
+                    <TextBlock x:Uid="Settings_BingResolution" FontWeight="Bold" />
                     <StackPanel Margin="{StaticResource XSmallTopMargin}" Orientation="Horizontal">
                         <RadioButtons x:Name="rbs_resolution" IsEnabled="False">
                             <RadioButton
-                      x:Uid="Settings_BingResolution_2160P"
-                      Click="RB_Resolution_Click"
-                      FontSize="15"
-                      GroupName="BingResolution" />
+                                x:Uid="Settings_BingResolution_2160P"
+                                Click="RB_Resolution_Click"
+                                FontSize="15"
+                                GroupName="BingResolution" />
                             <RadioButton
-                      x:Uid="Settings_BingResolution_1440P"
-                      Click="RB_Resolution_Click"
-                      FontSize="15"
-                      GroupName="BingResolution" />
+                                x:Uid="Settings_BingResolution_1440P"
+                                Click="RB_Resolution_Click"
+                                FontSize="15"
+                                GroupName="BingResolution" />
                             <RadioButton
-                      x:Uid="Settings_BingResolution_1080P"
-                      Click="RB_Resolution_Click"
-                      FontSize="15"
-                      GroupName="BingResolution" />
+                                x:Uid="Settings_BingResolution_1080P"
+                                Click="RB_Resolution_Click"
+                                FontSize="15"
+                                GroupName="BingResolution" />
                             <RadioButton
-                      x:Uid="Settings_BingResolution_720P"
-                      Click="RB_Resolution_Click"
-                      FontSize="15"
-                      GroupName="BingResolution" />
+                                x:Uid="Settings_BingResolution_720P"
+                                Click="RB_Resolution_Click"
+                                FontSize="15"
+                                GroupName="BingResolution" />
                         </RadioButtons>
-
                     </StackPanel>
                 </StackPanel>
 
-                <TextBlock x:Uid="Settings_Save" Style="{ThemeResource SubtitleTextBlockStyle}" />
-                <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
+                <TextBlock
+                    x:Uid="Settings_Save"
+                    Margin="{StaticResource XSmallTopMargin}"
+                    Style="{ThemeResource SubtitleTextBlockStyle}" />
+                <!--  第一组  -->
+                <Grid
+                    MaxWidth="1500"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                    <StackPanel
-                        Margin="{StaticResource XSmallTopMargin}"
+                    <TextBlock
+                        x:Uid="Settings_FocusWallpaperDir"
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
                         VerticalAlignment="Center"
-                        Orientation="Horizontal">
-                        <TextBlock
-                  x:Uid="Settings_FocusWallpaperDir"
-                  Width="120"
-                  VerticalAlignment="Center" />
-                        <TextBlock
-                  x:Name="txtFwDir"
-                  Width="350"
-                  VerticalAlignment="Center"
-                  FontSize="12"
-                  Text="{x:Bind ViewModel.FocusWallpaperDir, Mode=OneWay}" />
-                        <Button
-                  Margin="5,5,5,5"
-                  VerticalAlignment="Center"
-                  Click="Button_FwDir_Click">
-                            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE17C;" />
-                        </Button>
-                    </StackPanel>
+                        FontWeight="Bold" />
+                    <TextBlock
+                        x:Name="txtFwDir"
+                        Grid.Column="1"
+                        MaxWidth="800"
+                        VerticalAlignment="Center"
+                        FontSize="12"
+                        Text="{x:Bind ViewModel.FocusWallpaperDir, Mode=OneWay}"
+                        TextTrimming="CharacterEllipsis"
+                        TextWrapping="NoWrap"
+                        ToolTipService.ToolTip="{x:Bind ViewModel.FocusWallpaperDir, Mode=OneWay}" />
+                    <Button
+                        Grid.Column="2"
+                        Margin="8,0,8,0"
+                        VerticalAlignment="Center"
+                        Click="Button_FwDir_Click">
+                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE17C;" />
+                    </Button>
+                </Grid>
 
-                    <StackPanel
-              Margin="{StaticResource XSmallTopMargin}"
-              VerticalAlignment="Center"
-              Orientation="Horizontal">
-                        <TextBlock
-                  x:Uid="Settings_BingWallpaperDir"
-                  Width="120"
-                  VerticalAlignment="Center" />
-                        <TextBlock
-                  x:Name="txtBwDir"
-                  Width="350"
-                  VerticalAlignment="Center"
-                  FontSize="12"
-                  Text="{x:Bind ViewModel.BingWallpaperDir, Mode=OneWay}" />
-                        <Button
-                  Margin="5,5,5,5"
-                  VerticalAlignment="Center"
-                  Click="Button_BwDir_Click">
-                            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE17C;" />
-                        </Button>
-                    </StackPanel>
+                <!--  第二组  -->
+                <Grid
+                    MaxWidth="1500"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                    <StackPanel
-              Margin="{StaticResource XSmallTopMargin}"
-              VerticalAlignment="Center"
-              Orientation="Horizontal">
-                        <TextBlock
-                  x:Uid="Settings_LiveWallpaperDir"
-                  Width="120"
-                  VerticalAlignment="Center" />
-                        <TextBlock
-                  x:Name="txtLwDir"
-                  Width="350"
-                  VerticalAlignment="Center"
-                  FontSize="12"
-                  Text="{x:Bind ViewModel.LiveWallpaperDir, Mode=OneWay}" />
-                        <Button
-                  Margin="5,5,5,5"
-                  VerticalAlignment="Center"
-                  Click="Button_LwDir_Click">
-                            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE17C;" />
-                        </Button>
-                    </StackPanel>
-                </StackPanel>
+                    <TextBlock
+                        x:Uid="Settings_BingWallpaperDir"
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold" />
+                    <TextBlock
+                        x:Name="txtBwDir"
+                        Grid.Column="1"
+                        MaxWidth="800"
+                        VerticalAlignment="Center"
+                        FontSize="12"
+                        Text="{x:Bind ViewModel.BingWallpaperDir, Mode=OneWay}"
+                        TextTrimming="CharacterEllipsis"
+                        TextWrapping="NoWrap"
+                        ToolTipService.ToolTip="{x:Bind ViewModel.BingWallpaperDir, Mode=OneWay}" />
+                    <Button
+                        Grid.Column="2"
+                        Margin="8,0,8,0"
+                        VerticalAlignment="Center"
+                        Click="Button_BwDir_Click"
+                        IsEnabled="False">
+                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE17C;" />
+                    </Button>
+                </Grid>
 
+                <!--  第三组  -->
+                <Grid
+                    MaxWidth="1500"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock x:Uid="Settings_About" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                    <TextBlock
+                        x:Uid="Settings_LiveWallpaperDir"
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold" />
+                    <TextBlock
+                        x:Name="txtLwDir"
+                        Grid.Column="1"
+                        MaxWidth="800"
+                        VerticalAlignment="Center"
+                        FontSize="12"
+                        Text="{x:Bind ViewModel.LiveWallpaperDir, Mode=OneWay}"
+                        TextTrimming="CharacterEllipsis"
+                        TextWrapping="NoWrap"
+                        ToolTipService.ToolTip="{x:Bind ViewModel.LiveWallpaperDir, Mode=OneWay}" />
+                    <Button
+                        Grid.Column="2"
+                        Margin="8,0,8,0"
+                        VerticalAlignment="Center"
+                        Click="Button_LwDir_Click">
+                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE17C;" />
+                    </Button>
+                </Grid>
+
+                <TextBlock
+                    x:Uid="Settings_About"
+                    Margin="{StaticResource SmallTopMargin}"
+                    Style="{ThemeResource SubtitleTextBlockStyle}" />
                 <StackPanel Margin="{StaticResource XSmallTopMargin}">
                     <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}" />
                     <TextBlock
-              x:Uid="Settings_AboutDescription"
-              Margin="{StaticResource XSmallTopMargin}"
-              Style="{ThemeResource BodyTextBlockStyle}" />
-                    <HyperlinkButton x:Uid="SettingsPage_GithubLink" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" />
+                        x:Uid="Settings_AboutDescription"
+                        Margin="{StaticResource XSmallTopMargin}"
+                        Style="{ThemeResource BodyTextBlockStyle}" />
+                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock
+                            x:Uid="Settings_AboutAuthor"
+                            Margin="0,0,10,0"
+                            VerticalAlignment="Center"
+                            Style="{ThemeResource BodyTextBlockStyle}" />
+                        <HyperlinkButton
+                            x:Uid="SettingsPage_GithubLink"
+                            Margin="{StaticResource SettingsPageHyperlinkButtonMargin}"
+                            VerticalAlignment="Center" />
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

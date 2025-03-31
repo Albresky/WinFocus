@@ -52,7 +52,7 @@ public class SettingsUtil
         {
             UpdateSettings(ContainerType.GlobalSettings,
                 pathType,
-                Path.Combine(CoreEngine.Current.AppRootDirection, pathType));
+                Path.Combine(CoreEngine.Current.AppDataDicrection, pathType));
         }
     }
 
@@ -70,7 +70,9 @@ public class SettingsUtil
         var path = ReadSetting(ContainerType.GlobalSettings, pathType.ToString());
         if (string.IsNullOrEmpty(path))
         {
-            return Path.Combine(CoreEngine.Current.AppRootDirection, pathType.ToString());
+            String cmb_path = Path.Combine(CoreEngine.Current.AppDataDicrection, pathType.ToString());
+            Trace.WriteLine("GetAssetsPath: " + cmb_path);
+            return cmb_path;
         }
         else
         {

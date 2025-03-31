@@ -3,17 +3,19 @@
   <PropertyGroup>
     <UapAppxPackageBuildMode>SideloadOnly</UapAppxPackageBuildMode>
     <AppxShowAllApps>False</AppxShowAllApps>
-    <AppxBuildConfigurationSelection>x86|x64</AppxBuildConfigurationSelection>
+    <AppxBuildConfigurationSelection>x64</AppxBuildConfigurationSelection>
     <PackageOptionalProjectsInIdeBuilds>False</PackageOptionalProjectsInIdeBuilds>
     <DeployOptionalPackages>True</DeployOptionalPackages>
-    <AppIconSource>D:\Projects\WinFocus\WinFocus\Assets\WindowIcon_256x256.png</AppIconSource>
-    <Source>D:\Projects\WinFocus\WinFocus\Assets\WindowIcon_256x256.png</Source>
-    <SmallTileSource>D:\Projects\WinFocus\WinFocus\Assets\WindowIcon_256x256.png</SmallTileSource>
-    <MediumTileSource>D:\Projects\WinFocus\WinFocus\Assets\WindowIcon_256x256.png</MediumTileSource>
-    <WideTileSource>D:\Projects\WinFocus\WinFocus\Assets\WindowIcon_256x256.png</WideTileSource>
-    <LargeTileSource>D:\Projects\WinFocus\WinFocus\Assets\WindowIcon_256x256.png</LargeTileSource>
-    <SplashScreenSource>D:\Projects\WinFocus\WinFocus\Assets\WindowIcon_256x256.png</SplashScreenSource>
-    <PackageLogoSource>D:\Projects\WinFocus\WinFocus\Assets\WindowIcon_256x256.png</PackageLogoSource>
+    <AppIconSource>C:\Users\skshi\Downloads\original-image-1024x1024.png</AppIconSource>
+    <Source>C:\Users\skshi\Downloads\original-image-1024x1024.png</Source>
+    <SmallTileSource>C:\Users\skshi\Downloads\original-image-1024x1024.png</SmallTileSource>
+    <MediumTileSource>C:\Users\skshi\Downloads\original-image-1024x1024.png</MediumTileSource>
+    <WideTileSource>C:\Users\skshi\Downloads\original-image-1024x1024.png</WideTileSource>
+    <LargeTileSource>C:\Users\skshi\Downloads\original-image-1024x1024.png</LargeTileSource>
+    <SplashScreenSource>C:\Users\skshi\Downloads\original-image-1024x1024.png</SplashScreenSource>
+    <PackageLogoSource>C:\Users\skshi\Downloads\original-image-1024x1024.png</PackageLogoSource>
+    <BadgeLogoSource>C:\Users\skshi\Downloads\original-image-1024x1024.png</BadgeLogoSource>
+    <_LastSelectedProfileId>D:\Projects\WinFocus\WinFocus\Properties\PublishProfiles\win10-x64.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <Page Update="Views\BingWallpaperPage.xaml">
@@ -44,5 +46,10 @@
     <Page Update="Controls\DialogInfo.xaml">
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Update="Strings\en-us\Resources.resw">
+      <SubType>Designer</SubType>
+    </PRIResource>
   </ItemGroup>
 </Project>
