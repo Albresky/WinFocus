@@ -22,7 +22,7 @@
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x64</AppxBundlePlatforms>
-    <AppInstallerUri>https://cloudrive.albresky.cn/public/WinFocus/WinFocus_v2.0.0.0.msix</AppInstallerUri>
+    <AppInstallerUri>https://cloudrive.albresky.cn/public/WinFocus/WinFocus_v2.0.1.0.msix</AppInstallerUri>
     <Configurations>Debug;Release;All</Configurations>
   </PropertyGroup>
   <ItemGroup>

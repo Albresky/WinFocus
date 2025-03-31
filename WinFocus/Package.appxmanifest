@@ -12,7 +12,7 @@
   <Identity
     Name="4974BFE7-8BEF-4573-8304-63509F64E709"
     Publisher="CN=Albresky"
-    Version="2.0.0.0" />
+    Version="2.0.1.0" />
 
   <Properties>
     <DisplayName>WinFocus</DisplayName>
