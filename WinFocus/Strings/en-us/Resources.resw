@@ -148,13 +148,13 @@
     <value>Default</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>About this application</value>
+    <value>About WinFocus</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>TODO: 1.Bing Wallpaper. 2.Fix Relese build.</value>
   </data>
   <data name="SettingsPage_GithubLink.Content" xml:space="preserve">
-    <value>Github</value>
+    <value>Github - Albresky/WinFocus</value>
   </data>
   <data name="SettingsPage_GithubLink.NavigateUri" xml:space="preserve">
     <value>https://github.com/Albresky/WinFocus</value>
@@ -174,11 +174,14 @@
   <data name="Settings_Save.Text" xml:space="preserve">
     <value>Cache Directories</value>
   </data>
+	<data name="Settings_AboutAuthor.Text" xml:space="preserve">
+    <value>Author: </value>
+  </data>
   <data name="Shell_BingWallpaperGallery.Content" xml:space="preserve">
     <value>Bing Wallpaper</value>
   </data>
-  <data name="Settings_BingConfig" xml:space="preserve">
-    <value>Bing Cofig</value>
+  <data name="Settings_BingConfig.Text" xml:space="preserve">
+    <value>Bing Config</value>
   </data>
   <data name="Settings_BingResolution.Text" xml:space="preserve">
     <value>Bing Image Resolution</value>
